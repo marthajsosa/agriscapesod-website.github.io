@@ -1206,12 +1206,12 @@
   .hero-photo-note{position:absolute;left:20px;right:20px;bottom:20px;padding:1rem 1.2rem;background:rgba(7,38,63,.86);border:1px solid rgba(255,255,255,.22);border-radius:12px;color:#fff;font-weight:700;backdrop-filter:blur(8px);}
   .trust-ribbon{padding-block:0;}
   .trust-ribbon .wrap{
-  max-width:1500px;
+  max-width:1700px;
 }
 
 .trust-stats{
   display:grid;
-  grid-template-columns:repeat(5, minmax(0, 1fr));
+  grid-template-columns:repeat(6,minmax(0,1fr));
   gap:0;
   text-align:left;
   padding-block:1.55rem 1.25rem;
@@ -1220,18 +1220,23 @@
 .trust-stat{
   min-width:0;
   padding:0 1rem;
+  border-left:1px solid rgba(255,255,255,.22);
+}
+
+.trust-stat:first-child{
+  border-left:0;
+  padding-left:0;
 }
 
 .trust-stat strong{
   white-space:nowrap;
-  font-size:clamp(1.15rem, 1.7vw, 1.55rem);
+  font-size:clamp(.98rem,1.3vw,1.35rem);
 }
 
 .trust-stat span{
   line-height:1.35;
+  font-size:.76rem;
 }
-  .trust-stat{border-left:1px solid rgba(255,255,255,.22);padding-left:1rem;}
-  .trust-stat:first-child{border-left:0;padding-left:0;}
   .trust-footnote{margin:0;padding:0 0 .9rem;font-size:.72rem;color:rgba(255,255,255,.62);}
   .service-overview{display:grid;grid-template-columns:minmax(250px,.4fr) minmax(0,.6fr);gap:clamp(32px,6vw,72px);align-items:start;}
   .service-intro{position:sticky;top:125px;}
