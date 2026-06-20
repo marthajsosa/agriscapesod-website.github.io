@@ -111,8 +111,30 @@
 
   /* ---- Header ---- */
   header.nav{ position:sticky; top:0; z-index:60; background:#fff; border-bottom:1px solid var(--line); box-shadow:0 4px 14px rgba(10,58,99,.08); }
-  .nav-top{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-block:.5rem; }
-  .brand img{ height:56px; width:auto; }
+  .nav-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    padding-block:.75rem;
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:180px;
+    height:88px;
+    overflow:hidden;
+    flex:0 0 auto;
+  }
+
+  .brand img{
+    width:180px;
+    height:auto;
+    max-width:none;
+    object-fit:contain;
+  }
   .nav-actions{ display:flex; align-items:center; gap:1rem; }
   .gbadge{ display:flex; align-items:center; gap:.5rem; padding:.3rem .6rem; border:1px solid var(--line); border-radius:10px; }
   .gbadge .glogo{ font-family:var(--display); font-weight:800; font-size:1.1rem; color:#4285F4; }
@@ -1027,8 +1049,15 @@
     padding-block:.45rem;
   }
 
+  .brand{
+    width:125px;
+    height:64px;
+  }
+
   .brand img{
-    height:44px;
+    width:125px;
+    height:auto;
+    max-width:none;
   }
 
   .nav-actions{
