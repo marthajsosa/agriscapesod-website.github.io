@@ -136,41 +136,116 @@
   .hero .wrap{ position:relative; z-index:2; padding-block:clamp(50px,8vw,100px); }
   .hero-inner{ max-width:680px; }
   .hero h1{ font-size:clamp(2.4rem,6vw,4.4rem); font-weight:800; margin:.5rem 0 .35rem; }
-  .hero .tag{ font-family:var(--display); font-weight:600; font-style:italic; font-size:clamp(1.05rem,2.2vw,1.45rem); color:#cfe8bd; }
+  .hero .tag{ font-family:var(--display); font-weight:600; font-style:italic; font-size:clamp(1.05rem,2.2vw,1.45rem); color:#d6ecc2; }
   .hero p.sub{ font-size:1.1rem; color:#e9f1f7; max-width:56ch; margin:1rem 0 1.3rem; }
   .hero .cta-row{ display:flex; gap:.8rem; flex-wrap:wrap; align-items:center; }
   .hero .callline{ margin-top:.95rem; font-size:.96rem; color:#dfeaf2; }
   .hero .callline a{ font-weight:700; color:#fff; border-bottom:1px solid rgba(255,255,255,.5); }
 
-/* ---- Stats ---- */
-.stats{
-  background:#2f97d6;
-  border-bottom:1px solid #d2e4c5;
-}
+  /* ---- Trust ribbon ---- */
+  .trust-ribbon{
+    position:relative;
+    overflow:hidden;
+    color:#fff;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(4,37,50,.94),
+        rgba(10,76,77,.92)
+      );
+    border-top:1px solid rgba(255,255,255,.10);
+    border-bottom:1px solid rgba(255,255,255,.12);
+  }
 
-.stats .wrap{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1rem;
-  padding-block:1.3rem;
-  text-align:center;
-}
+  .trust-ribbon::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(
+        circle at 20% 20%,
+        rgba(255,255,255,.06),
+        transparent 34%
+      );
+    pointer-events:none;
+  }
 
-.stat b{
-  display:block;
-  font-family:var(--display);
-  font-weight:800;
-  font-size:1.7rem;
-  color:#fff;
-}
+  .trust-ribbon .wrap{
+    position:relative;
+    z-index:1;
+  }
 
-.stat span{
-  font-size:.85rem;
-  color:#fff;
-  font-weight:600;
-}
+  .trust-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1rem;
+    padding-block:1.2rem 1rem;
+    text-align:center;
+  }
 
-  /* ---- Sections ---- */
+  .trust-stat{
+    padding:.15rem .75rem;
+  }
+
+  .trust-stat strong{
+    display:block;
+    font-family:var(--display);
+    font-size:clamp(1.25rem,2vw,1.65rem);
+    font-weight:800;
+    line-height:1.1;
+    color:#fff;
+  }
+
+  .trust-stat span{
+    display:block;
+    margin-top:.3rem;
+    font-size:.82rem;
+    font-weight:600;
+    color:rgba(255,255,255,.76);
+  }
+
+  .trust-marquee{
+    overflow:hidden;
+    border-top:1px solid rgba(255,255,255,.11);
+    padding:.8rem 0;
+  }
+
+  .trust-track{
+    display:flex;
+    align-items:center;
+    gap:2.4rem;
+    width:max-content;
+    animation:trustScroll 30s linear infinite;
+    will-change:transform;
+  }
+
+  .trust-track span{
+    display:inline-flex;
+    align-items:center;
+    gap:.65rem;
+    white-space:nowrap;
+    color:rgba(255,255,255,.88);
+    font-size:.8rem;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+
+  .trust-track span::before{
+    content:"";
+    width:8px;
+    height:8px;
+    border:1.5px solid rgba(255,255,255,.58);
+    border-radius:50%;
+    flex:0 0 auto;
+  }
+
+  @keyframes trustScroll{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+
+/* ---- Sections ---- */
   section{ padding-block:clamp(50px,7vw,92px); }
   .sec-head{ max-width:64ch; margin-bottom:2.3rem; }
   .sec-head.center{ margin-inline:auto; text-align:center; }
@@ -747,270 +822,6 @@
     }
   }
 
-
-  /* ======== SAVE ESTIMATE / FREE SITE VISIT ======== */
-  .estimate-share-overlay{
-    position:fixed;
-    inset:0;
-    z-index:6000;
-    display:none;
-    align-items:flex-start;
-    justify-content:center;
-    padding:4vh 16px;
-    overflow-y:auto;
-    background:rgba(10,30,50,.68);
-  }
-
-  .estimate-share-overlay.open{
-    display:flex;
-  }
-
-  .estimate-share{
-    width:100%;
-    max-width:720px;
-    overflow:hidden;
-    background:#fff;
-    border-radius:16px;
-    box-shadow:0 30px 80px -30px rgba(0,0,0,.7);
-  }
-
-  .estimate-share-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:1rem;
-    padding:1rem 1.3rem;
-    background:var(--blue-deep);
-    color:#fff;
-  }
-
-  .estimate-share-head h3{
-    margin:0;
-    color:#fff;
-    font-size:1.25rem;
-  }
-
-  .estimate-share-head p{
-    margin:.2rem 0 0;
-    color:#cfe3f2;
-    font-size:.86rem;
-  }
-
-  .estimate-share-close{
-    border:0;
-    background:none;
-    color:#fff;
-    font-size:1.6rem;
-    line-height:1;
-    cursor:pointer;
-  }
-
-  .estimate-share-body{
-    padding:1.35rem;
-  }
-
-  .estimate-share-panel{
-    display:none;
-  }
-
-  .estimate-share-panel.show{
-    display:block;
-  }
-
-  .estimate-copy{
-    margin:0 0 1rem;
-    color:var(--ink-soft);
-  }
-
-  .estimate-snapshot{
-    display:grid;
-    gap:.5rem;
-    margin:0 0 1.1rem;
-    padding:1rem;
-    border:1px solid #d6e8c6;
-    border-radius:12px;
-    background:var(--tint-green);
-  }
-
-  .estimate-snapshot-row{
-    display:flex;
-    justify-content:space-between;
-    gap:1rem;
-  }
-
-  .estimate-snapshot-row span{
-    color:var(--ink-soft);
-  }
-
-  .estimate-snapshot-row strong{
-    color:var(--blue-deep);
-    text-align:right;
-  }
-
-  .estimate-email-fields{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:.7rem;
-    margin-bottom:1rem;
-  }
-
-  .estimate-email-fields label,
-  .estimate-share-body > .estimate-share-panel label{
-    display:block;
-    margin:0 0 .35rem;
-    color:var(--blue-deep);
-    font-size:.88rem;
-    font-weight:700;
-  }
-
-  .estimate-email-fields input{
-    width:100%;
-    padding:.8rem .9rem;
-    border:1.5px solid var(--line);
-    border-radius:10px;
-    font:inherit;
-  }
-
-  .estimate-fineprint{
-    max-height:280px;
-    overflow-y:auto;
-    margin:1rem 0;
-    padding:1rem 1.1rem;
-    border:2px solid #d9b36c;
-    border-radius:12px;
-    background:#fff8ea;
-    color:#594725;
-    font-size:.82rem;
-    line-height:1.55;
-  }
-
-  .estimate-fineprint strong{
-    display:block;
-    margin-bottom:.45rem;
-    color:#6f4f12;
-    font-size:.92rem;
-  }
-
-  .estimate-fineprint ul{
-    margin:.5rem 0 0;
-    padding-left:1.15rem;
-  }
-
-  .estimate-fineprint li{
-    margin:.35rem 0;
-  }
-
-  .estimate-consent{
-    display:flex;
-    align-items:flex-start;
-    gap:.6rem;
-    margin:.9rem 0 0;
-    color:var(--ink);
-    font-size:.86rem;
-  }
-
-  .estimate-consent input{
-    width:18px;
-    height:18px;
-    margin-top:.15rem;
-    flex:0 0 auto;
-  }
-
-  .estimate-share-actions{
-    display:flex;
-    justify-content:space-between;
-    gap:.75rem;
-    padding:1rem 1.3rem;
-    border-top:1px solid var(--line);
-  }
-
-  .estimate-share-actions .btn{
-    white-space:normal;
-    text-align:center;
-  }
-
-  .estimate-share-error{
-    min-height:1.2em;
-    margin-top:.65rem;
-    color:#a3452f;
-    font-size:.86rem;
-    font-weight:700;
-  }
-
-  .free-visit{
-    text-align:center;
-    padding:.8rem 0 .2rem;
-  }
-
-  .free-visit-icon{
-    width:62px;
-    height:62px;
-    display:grid;
-    place-items:center;
-    margin:0 auto 1rem;
-    border-radius:50%;
-    background:var(--tint-green);
-    color:var(--green-d);
-    font-size:1.8rem;
-  }
-
-  .free-visit h3{
-    color:var(--blue-deep);
-    font-size:1.6rem;
-  }
-
-  .free-visit p{
-    max-width:54ch;
-    margin:.75rem auto 1.2rem;
-    color:var(--ink-soft);
-  }
-
-  .free-visit-list{
-    max-width:520px;
-    margin:0 auto 1.3rem;
-    padding:1rem 1.1rem;
-    text-align:left;
-    border:1px solid var(--line);
-    border-radius:12px;
-    background:#f8fafb;
-  }
-
-  .free-visit-list li{
-    margin:.35rem 0;
-  }
-
-  .free-visit .phone-number{
-    display:block;
-    margin:.4rem 0 1rem;
-    color:var(--blue-deep);
-    font-family:var(--display);
-    font-size:1.55rem;
-    font-weight:800;
-  }
-
-  @media (max-width:600px){
-    .estimate-email-fields{
-      grid-template-columns:1fr;
-    }
-
-    .estimate-share-actions{
-      flex-direction:column-reverse;
-    }
-
-    .estimate-share-actions .btn{
-      width:100%;
-    }
-
-    .estimate-snapshot-row{
-      flex-direction:column;
-      gap:.1rem;
-    }
-
-    .estimate-snapshot-row strong{
-      text-align:left;
-    }
-  }
-
   /* ======== COOKIE BANNER ======== */
   .cookie{ position:fixed; bottom:0; left:0; right:0; z-index:150; background:#fff; border-top:1px solid var(--line); box-shadow:0 -10px 30px -20px rgba(0,0,0,.4); padding:1rem var(--pad); display:none; }
   .cookie.show{ display:block; }
@@ -1043,7 +854,7 @@
     .grid-4{ grid-template-columns:1fr 1fr; }
     .calc, .cover{ grid-template-columns:1fr; }
     .reviews, .arts{ grid-template-columns:1fr 1fr; }
-    .stats .wrap{ grid-template-columns:1fr 1fr; }
+    .trust-stats{ grid-template-columns:1fr 1fr; }
     .foot-grid{ grid-template-columns:1fr 1fr; }
     .service-paths{ grid-template-columns:1fr; }
     .customer-types{ grid-template-columns:1fr; }
@@ -1110,9 +921,31 @@
   .grid-4,
   .reviews,
   .arts,
-  .foot-grid,
-  .stats .wrap{
+  .foot-grid{
     grid-template-columns:1fr;
+  }
+
+  .trust-stats{
+    grid-template-columns:1fr 1fr;
+    gap:.75rem;
+    padding-block:1rem .9rem;
+  }
+
+  .trust-stat strong{
+    font-size:1.2rem;
+  }
+
+  .trust-stat span{
+    font-size:.75rem;
+  }
+
+  .trust-track{
+    gap:1.5rem;
+    animation-duration:24s;
+  }
+
+  .trust-track span{
+    font-size:.72rem;
   }
 
   .ticker .feats{
@@ -1166,6 +999,7 @@
   @media (prefers-reduced-motion:reduce){
     *{ scroll-behavior:auto; } .reveal{ opacity:1; transform:none; transition:none; }
     .svc:hover,.btn:hover{ transform:none; }
+    .trust-track{ animation:none; }
   }
 </style>
 
@@ -1241,13 +1075,54 @@
   </div></div>
 </section>
 
-<!-- ===== Trust strip (homeowner-focused; scale stats live on the Commercial page) ===== -->
-<div class="stats"><div class="wrap">
-  <div class="stat"><b>Since 2012</b><span>Family-owned &amp; local</span></div>
-  <div class="stat"><b>Fresh-cut</b><span>Harvested within 24 hrs</span></div>
-  <div class="stat"><b>Free</b><span>Local delivery</span></div>
-  <div class="stat"><b>Right grass</b><span>Matched to your yard</span></div>
-</div></div>
+<!-- ===== Trust ribbon ===== -->
+<section class="trust-ribbon" aria-label="Why customers trust AgriScape">
+  <div class="wrap">
+
+    <div class="trust-stats">
+      <div class="trust-stat">
+        <strong>Since 2012</strong>
+        <span>Family-owned and local</span>
+      </div>
+
+      <div class="trust-stat">
+        <strong>Fresh-cut</strong>
+        <span>Harvested within 24 hours</span>
+      </div>
+
+      <div class="trust-stat">
+        <strong>Free local delivery</strong>
+        <span>Across our core service area</span>
+      </div>
+
+      <div class="trust-stat">
+        <strong>Right grass</strong>
+        <span>Matched to your yard and project</span>
+      </div>
+    </div>
+
+    <div class="trust-marquee" aria-label="Customers and project types we serve">
+      <div class="trust-track">
+        <span>Homeowners</span>
+        <span>HOAs</span>
+        <span>Landscapers</span>
+        <span>Builders</span>
+        <span>Property managers</span>
+        <span>Contractors</span>
+        <span>Municipal projects</span>
+
+        <span aria-hidden="true">Homeowners</span>
+        <span aria-hidden="true">HOAs</span>
+        <span aria-hidden="true">Landscapers</span>
+        <span aria-hidden="true">Builders</span>
+        <span aria-hidden="true">Property managers</span>
+        <span aria-hidden="true">Contractors</span>
+        <span aria-hidden="true">Municipal projects</span>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <!-- ===== Services ===== -->
 <section id="services">
@@ -1266,6 +1141,9 @@
 
       <!-- Sod delivery -->
       <article class="service-path reveal">
+        <div class="service-path-icon" aria-hidden="true">
+          🚚
+        </div>
 
         <div class="service-path-content">
           <span class="service-label">Sod delivery</span>
@@ -1302,6 +1180,9 @@
 
       <!-- Full-service installation -->
       <article class="service-path featured reveal">
+        <div class="service-path-icon" aria-hidden="true">
+          🌱
+        </div>
 
         <div class="service-path-content">
           <span class="service-label">Full-service installation</span>
@@ -1413,7 +1294,7 @@
         <div class="tier" id="tierNote"></div>
         <p class="disc">Ballpark only, using sample rates. Your exact, free quote is confirmed once we see your space.</p>
       </div>
-      <button class="btn btn-primary" type="button" onclick="openEstimateShare()">Save this estimate &amp; schedule a free exact quote</button>
+      <button class="btn btn-primary" onclick="openWizard()">Get my exact quote</button>
       <p class="calc-foot"><strong>What's included:</strong> removal of old turf, delivery, and professional installation. <strong>Why under 1,600 sq ft costs more per foot:</strong> fixed costs (delivery, crew minimums, equipment) are the same on a small job as a big one, so they're a bigger share of a smaller lawn. At 1,600 sq ft and up, that spreads out and the per-foot rate drops.</p>
     </div>
   </div>
@@ -1643,193 +1524,6 @@
 <div class="mobile-bar">
   <a class="btn btn-out-light" href="tel:+18332474763" style="border-color:rgba(255,255,255,.6);">Call</a>
   <button class="btn btn-primary" onclick="openWizard()">Schedule now</button>
-</div>
-
-
-<!-- ===== SAVE ROUGH ESTIMATE / SCHEDULE FREE SITE VISIT ===== -->
-<div
-  class="estimate-share-overlay"
-  id="estimateShareOverlay"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="estimateShareTitle"
->
-  <div class="estimate-share">
-
-    <div class="estimate-share-head">
-      <div>
-        <h3 id="estimateShareTitle">Save your rough installation estimate</h3>
-        <p>Email the planning estimate to yourself, then schedule a free on-site measurement.</p>
-      </div>
-      <button
-        class="estimate-share-close"
-        type="button"
-        onclick="closeEstimateShare()"
-        aria-label="Close"
-      >
-        ×
-      </button>
-    </div>
-
-    <div class="estimate-share-body">
-
-      <!-- Step 1: email rough estimate -->
-      <div class="estimate-share-panel show" id="estimateShareStep1">
-        <p class="estimate-copy">
-          This is a planning estimate based only on the square footage and grass
-          type entered. It is not a proposal, contract, guaranteed price, or
-          substitute for an on-site review.
-        </p>
-
-        <div class="estimate-snapshot">
-          <div class="estimate-snapshot-row">
-            <span>Approximate area</span>
-            <strong id="shareSqFt">—</strong>
-          </div>
-          <div class="estimate-snapshot-row">
-            <span>Grass type</span>
-            <strong id="shareGrass">—</strong>
-          </div>
-          <div class="estimate-snapshot-row">
-            <span>Rough installed range</span>
-            <strong id="shareRange">—</strong>
-          </div>
-        </div>
-
-        <div class="estimate-email-fields">
-          <div>
-            <label for="shareName">Your name</label>
-            <input id="shareName" type="text" autocomplete="name" />
-          </div>
-
-          <div>
-            <label for="shareEmail">Your email</label>
-            <input id="shareEmail" type="email" autocomplete="email" />
-          </div>
-        </div>
-
-        <div class="estimate-fineprint">
-          <strong>What can change the final installation price</strong>
-          This rough estimate assumes the stated square footage is reasonably
-          accurate, the lawn is reachable by the crew and equipment, normal soil
-          preparation is sufficient, and no hidden site condition requires added
-          labor, materials, equipment, disposal, repair, or delay.
-
-          <ul>
-            <li>
-              Limited access, narrow gates, fenced yards, stairs, steep slopes,
-              retaining walls, pools, canals, soft ground, or areas that require
-              sod and debris to be carried by hand.
-            </li>
-            <li>
-              Septic tanks, drain fields, wells, irrigation lines, utility lines,
-              low-voltage wiring, invisible fencing, drainage systems, or other
-              underground features that restrict equipment use or require hand work.
-            </li>
-            <li>
-              Heavy existing turf, thick roots, tree roots, stumps, rocks,
-              concrete, pavers, buried debris, landscape fabric, construction
-              material, or unusually difficult removal.
-            </li>
-            <li>
-              Poor drainage, standing water, erosion, washout, severe compaction,
-              unsuitable soil, low areas, uneven grades, or the need for imported
-              soil, fill, sand, grading, drainage correction, or erosion control.
-            </li>
-            <li>
-              Irrigation repairs, sprinkler relocation, missing coverage,
-              pressure problems, damaged heads, or adjustments needed before or
-              after installation.
-            </li>
-            <li>
-              Beds, trees, patios, driveways, walkways, curbing, playgrounds,
-              sheds, equipment, furniture, pet areas, or other obstacles that
-              reduce production speed or create detailed cutting.
-            </li>
-            <li>
-              Extra hauling, disposal fees, long carry distances, restricted
-              parking, traffic control, elevator or gated-community access,
-              HOA requirements, permits, site rules, or limited work hours.
-            </li>
-            <li>
-              Grass variety, sod availability, farm conditions, fuel costs,
-              delivery distance, job minimums, equipment needs, crew size,
-              weather, saturated soil, drought, heat, or schedule changes.
-            </li>
-            <li>
-              Differences between estimated and verified square footage,
-              especially when aerial imagery is old, obstructed by trees, angled,
-              or does not reflect recent pools, additions, patios, beds, or grading.
-            </li>
-            <li>
-              Any condition discovered during the on-site consultation or after
-              removal begins that could not reasonably be confirmed from photos,
-              aerial imagery, customer measurements, or the visible surface.
-            </li>
-          </ul>
-        </div>
-
-        <label class="estimate-consent">
-          <input id="shareAcknowledge" type="checkbox" />
-          <span>
-            I understand this is a rough planning estimate. AgriScape must inspect
-            and measure the property before providing the final installation quote.
-          </span>
-        </label>
-
-        <div class="estimate-share-error" id="estimateShareError"></div>
-      </div>
-
-      <!-- Step 2: schedule free exact quote -->
-      <div class="estimate-share-panel" id="estimateShareStep2">
-        <div class="free-visit">
-          <div class="free-visit-icon" aria-hidden="true">📍</div>
-          <h3>Schedule your free on-site consultation</h3>
-          <p>
-            We’ll confirm the measurements, inspect access and site conditions,
-            discuss grass options, and prepare the exact installation quote at no
-            charge.
-          </p>
-
-          <ul class="free-visit-list">
-            <li>On-site lawn measurement</li>
-            <li>Access and removal review</li>
-            <li>Grading, drainage, soil, and irrigation check</li>
-            <li>Confirmed grass selection and final project pricing</li>
-          </ul>
-
-          <span class="phone-number">833-247-4763</span>
-
-          <a class="btn btn-primary" href="tel:+18332474763">
-            Call to schedule your free consultation
-          </a>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="estimate-share-actions" id="estimateShareActions">
-      <button
-        class="btn btn-mini-ghost"
-        id="estimateShareBack"
-        type="button"
-        onclick="showEstimateShareStep(1)"
-        style="display:none;"
-      >
-        Back
-      </button>
-
-      <button
-        class="btn btn-blue"
-        id="estimateShareNext"
-        type="button"
-        onclick="emailEstimateAndContinue()"
-      >
-        Email this estimate to me
-      </button>
-    </div>
-
-  </div>
 </div>
 
 <!-- ===== WIZARD MODAL ===== -->
@@ -2120,131 +1814,6 @@
       : "Volume rate applied (1,600+ sq ft).";
   }
   sqftEl.addEventListener('input', calc); grassEl.addEventListener('change', calc);
-
-
-  // ---- SAVE ROUGH ESTIMATE / FREE SITE VISIT ----
-  const estimateShareOverlay=document.getElementById('estimateShareOverlay');
-
-  function getCurrentEstimateSnapshot(){
-    const sqft=Math.round(Number(sqftEl.value)||0);
-    const grass=grassEl.options[grassEl.selectedIndex]?.text || '';
-    const range=out.textContent.trim();
-
-    return {sqft,grass,range};
-  }
-
-  function openEstimateShare(){
-    const snapshot=getCurrentEstimateSnapshot();
-    const error=document.getElementById('estimateShareError');
-
-    if(!snapshot.sqft || snapshot.range==='—'){
-      error.textContent='';
-      document.getElementById('sqftCalc').focus();
-      document.getElementById('estimate').scrollIntoView({
-        behavior:'smooth',
-        block:'center'
-      });
-      return;
-    }
-
-    document.getElementById('shareSqFt').textContent=
-      `${snapshot.sqft.toLocaleString('en-US')} sq. ft.`;
-    document.getElementById('shareGrass').textContent=snapshot.grass;
-    document.getElementById('shareRange').textContent=snapshot.range;
-
-    document.getElementById('shareName').value='';
-    document.getElementById('shareEmail').value='';
-    document.getElementById('shareAcknowledge').checked=false;
-    error.textContent='';
-
-    showEstimateShareStep(1);
-    estimateShareOverlay.classList.add('open');
-    document.body.style.overflow='hidden';
-  }
-
-  function closeEstimateShare(){
-    estimateShareOverlay.classList.remove('open');
-    document.body.style.overflow='';
-  }
-
-  estimateShareOverlay.addEventListener('click',event => {
-    if(event.target===estimateShareOverlay) closeEstimateShare();
-  });
-
-  function showEstimateShareStep(step){
-    const step1=document.getElementById('estimateShareStep1');
-    const step2=document.getElementById('estimateShareStep2');
-    const back=document.getElementById('estimateShareBack');
-    const next=document.getElementById('estimateShareNext');
-
-    step1.classList.toggle('show',step===1);
-    step2.classList.toggle('show',step===2);
-
-    back.style.display=step===2?'inline-flex':'none';
-
-    if(step===1){
-      next.style.display='inline-flex';
-      next.textContent='Email this estimate to me';
-      next.onclick=emailEstimateAndContinue;
-    }else{
-      next.style.display='none';
-    }
-  }
-
-  function emailEstimateAndContinue(){
-    const snapshot=getCurrentEstimateSnapshot();
-    const name=document.getElementById('shareName').value.trim();
-    const email=document.getElementById('shareEmail').value.trim();
-    const acknowledged=document.getElementById('shareAcknowledge').checked;
-    const error=document.getElementById('estimateShareError');
-
-    if(!name){
-      error.textContent='Please enter your name.';
-      return;
-    }
-
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-      error.textContent='Please enter a valid email address.';
-      return;
-    }
-
-    if(!acknowledged){
-      error.textContent='Please acknowledge that this is a rough planning estimate.';
-      return;
-    }
-
-    error.textContent='';
-
-    const subject='My AgriScape rough sod installation estimate';
-
-    const body=[
-      `Hi ${name},`,
-      '',
-      'Here is the rough AgriScape sod installation estimate you prepared:',
-      '',
-      `Approximate area: ${snapshot.sqft.toLocaleString('en-US')} sq. ft.`,
-      `Grass type: ${snapshot.grass}`,
-      `Rough installed range: ${snapshot.range}`,
-      '',
-      'This planning estimate is not a proposal, contract, or guaranteed price.',
-      'Final pricing requires a free on-site measurement and review.',
-      '',
-      'Price may change due to access limitations, septic or drain-field restrictions,',
-      'irrigation or utility conflicts, removal difficulty, roots, rocks, debris,',
-      'drainage, grading, soil conditions, slopes, obstacles, hand-carry distance,',
-      'disposal, permits, HOA/site restrictions, weather, sod availability, job',
-      'minimums, delivery distance, and differences in verified square footage.',
-      '',
-      'Call 833-247-4763 to schedule a free on-site consultation and exact quote.'
-    ].join('\n');
-
-    window.location.href=
-      `mailto:${encodeURIComponent(email)}` +
-      `?subject=${encodeURIComponent(subject)}` +
-      `&body=${encodeURIComponent(body)}`;
-
-    showEstimateShareStep(2);
-  }
 
   // ---- WIZARD ----
   const overlay=document.getElementById('wzOverlay');
