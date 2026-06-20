@@ -318,16 +318,103 @@
     .stats .wrap{ grid-template-columns:1fr 1fr; }
     .foot-grid{ grid-template-columns:1fr 1fr; }
   }
-  @media (max-width:600px){
-    .gbadge .gcount{ display:none; }
-    .grid-4, .reviews, .arts, .foot-grid, .stats .wrap{ grid-template-columns:1fr; }
-    .ticker .feats{ display:none; }
-    .mobile-bar{ display:flex; }
-    .fab-wrap{ bottom:74px; }
-    body{ padding-bottom:64px; }
-    .opt-grid{ grid-template-columns:1fr; }
-    .callback .row2{ grid-template-columns:1fr; }
+@media (max-width:600px){
+
+  .nav-top{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    align-items:center;
+    gap:.55rem;
+    padding-block:.45rem;
   }
+
+  .brand img{
+    height:38px;
+  }
+
+  .nav-actions{
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:.4rem;
+    min-width:0;
+  }
+
+  .gbadge{
+    padding:.25rem .4rem;
+    gap:.25rem;
+    border-radius:8px;
+  }
+
+  .gbadge .glogo{
+    font-size:.95rem;
+  }
+
+  .gbadge .grate,
+  .gbadge .gcount{
+    display:none;
+  }
+
+  .gbadge .gstars{
+    font-size:.67rem;
+    letter-spacing:0;
+    white-space:nowrap;
+  }
+
+  .nav-phone,
+  .nav-actions > .btn{
+    display:none;
+  }
+
+  .menu-btn{
+    padding:.25rem;
+    flex-shrink:0;
+  }
+
+  .menu-btn span{
+    width:22px;
+    margin:4px 0;
+  }
+
+  .grid-4,
+  .reviews,
+  .arts,
+  .foot-grid,
+  .stats .wrap{
+    grid-template-columns:1fr;
+  }
+
+  .ticker .feats{
+    display:none;
+  }
+
+  .ticker .wrap{
+    justify-content:center;
+    text-align:center;
+    font-size:.82rem;
+    padding-block:.35rem;
+  }
+
+  .mobile-bar{
+    display:flex;
+  }
+
+  .fab-wrap{
+    bottom:74px;
+  }
+
+  body{
+    padding-bottom:64px;
+  }
+
+  .opt-grid{
+    grid-template-columns:1fr;
+  }
+
+  .callback .row2{
+    grid-template-columns:1fr;
+  }
+}
   @media (prefers-reduced-motion:reduce){
     *{ scroll-behavior:auto; } .reveal{ opacity:1; transform:none; transition:none; }
     .svc:hover,.btn:hover{ transform:none; }
