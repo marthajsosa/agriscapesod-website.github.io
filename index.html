@@ -148,7 +148,7 @@
   border-bottom:1px solid #d2e4c5;
 }
   .stats .wrap{ display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; padding-block:1.3rem; text-align:center; }
-  .stat b{ display:block; font-family:var(--display); font-weight:800; font-size:1.7rem; color:var(--blue-deep-d); }
+  .stat b{ display:block; font-family:var(--display); font-weight:800; font-size:1.7rem; color:var(--green-d); }
   .stat span{ font-size:.85rem; color:var(--ink-soft); font-weight:600; }
 
   /* ---- Sections ---- */
@@ -1216,7 +1216,7 @@
       <h2>Outline your yard and calculate how much sod to order</h2>
       <p>
         Search for the property, draw around each lawn area on the aerial map,
-        and we’ll add 15% for cuts and waste before calculating full pallets.
+        and we’ll add 8% for cuts and waste before calculating full pallets.
       </p>
     </div>
 
@@ -1259,7 +1259,7 @@
         </div>
 
         <div class="map-metric">
-          <span>15% cuts and waste</span>
+          <span>8% cuts and waste</span>
           <strong id="mapWasteSqFt">0 sq. ft.</strong>
         </div>
 
@@ -1770,7 +1770,7 @@
     });
 
     mapMeasuredSqFt=totalSquareMeters*10.7639104167;
-    const wasteSqFt=mapMeasuredSqFt*.15;
+    const wasteSqFt=mapMeasuredSqFt*.08;
     mapAdjustedSqFt=mapMeasuredSqFt+wasteSqFt;
     mapPalletCount=mapAdjustedSqFt>0 ? Math.ceil(mapAdjustedSqFt/400) : 0;
 
@@ -1939,7 +1939,7 @@
 
     document.getElementById('deliveryResult').textContent=
       `${formatWholeNumber(mapMeasuredSqFt)} sq. ft. outlined, ` +
-      `${formatWholeNumber(mapAdjustedSqFt)} sq. ft. after the 15% allowance, ` +
+      `${formatWholeNumber(mapAdjustedSqFt)} sq. ft. after the 8% allowance, ` +
       `for approximately ${mapPalletCount} ${mapPalletCount===1?'pallet':'pallets'}.`;
 
     document.getElementById('deliveryQuantityError').textContent='';
