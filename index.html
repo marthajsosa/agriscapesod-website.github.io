@@ -131,7 +131,7 @@
   .hero-slides{ position:absolute; inset:0; }
   .hero-slides .slide{ position:absolute; inset:0; background-color:var(--blue-deep); background-size:cover; background-position:center; opacity:0; transition:opacity 1.6s ease-in-out; }
   .hero-slides .slide.active{ opacity:1; }
-  .hero .scrim{ position:absolute; inset:0; background:linear-gradient(100deg, rgba(3,10,16,.89) 0%, rgba(14,38,24,.66) 45%, rgba(47,125,62,.40) 100%); }
+  .hero .scrim{ position:absolute; inset:0; background:linear-gradient(100deg, rgba(3,10,16,.84) 0%, rgba(14,38,24,.66) 45%, rgba(47,125,62,.40) 100%); }
   .hero .stripes{ position:absolute; inset:0; opacity:0; mix-blend-mode:screen; background:repeating-linear-gradient(102deg,#fff 0 36px, transparent 36px 72px); }
   .hero .wrap{ position:relative; z-index:2; padding-block:clamp(50px,8vw,100px); }
   .hero-inner{ max-width:680px; }
@@ -338,6 +338,158 @@
     color:var(--green-d);
     font-weight:800;
     font-size:1.2rem;
+  }
+
+
+  /* ---- Map sod calculator ---- */
+  #measure-lawn{
+    background:#fff;
+  }
+
+  .map-calc-layout{
+    display:grid;
+    grid-template-columns:minmax(0,1.55fr) minmax(300px,.75fr);
+    gap:1.4rem;
+    align-items:start;
+  }
+
+  .map-card,
+  .map-results{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+  }
+
+  .map-card{
+    overflow:hidden;
+  }
+
+  .map-search{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:.7rem;
+    padding:1rem;
+    border-bottom:1px solid var(--line);
+    background:#fff;
+  }
+
+  .map-search input{
+    width:100%;
+    padding:.82rem .9rem;
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    font:inherit;
+  }
+
+  .map-search input:focus{
+    outline:none;
+    border-color:var(--green);
+  }
+
+  #sodMap{
+    height:520px;
+    width:100%;
+    background:#e8ece8;
+  }
+
+  .map-status{
+    min-height:1.2em;
+    padding:.65rem 1rem;
+    color:var(--ink-soft);
+    font-size:.84rem;
+    border-top:1px solid var(--line);
+  }
+
+  .map-results{
+    position:sticky;
+    top:120px;
+    padding:1.4rem;
+  }
+
+  .map-results h3{
+    color:var(--blue-deep);
+    font-size:1.35rem;
+    margin-bottom:.9rem;
+  }
+
+  .map-instructions{
+    margin:0 0 1.1rem;
+    padding-left:1.2rem;
+    color:var(--ink-soft);
+    font-size:.92rem;
+  }
+
+  .map-instructions li{
+    margin:.35rem 0;
+  }
+
+  .map-metric{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:1rem;
+    padding:.75rem 0;
+    border-bottom:1px solid var(--line);
+  }
+
+  .map-metric span{
+    color:var(--ink-soft);
+    font-size:.9rem;
+  }
+
+  .map-metric strong{
+    color:var(--blue-deep);
+    font-family:var(--display);
+    font-size:1.15rem;
+    text-align:right;
+  }
+
+  .map-metric.primary strong{
+    color:var(--green-d);
+    font-size:1.55rem;
+  }
+
+  .map-result-actions{
+    display:grid;
+    gap:.7rem;
+    margin-top:1.2rem;
+  }
+
+  .map-result-actions .btn{
+    width:100%;
+    white-space:normal;
+    text-align:center;
+  }
+
+  .map-disclaimer{
+    margin:.9rem 0 0;
+    color:var(--ink-soft);
+    font-size:.76rem;
+    line-height:1.45;
+  }
+.leaflet-control-attribution{
+    font-size:10px;
+  }
+
+  @media (max-width:980px){
+    .map-calc-layout{
+      grid-template-columns:1fr;
+    }
+
+    .map-results{
+      position:static;
+    }
+  }
+
+  @media (max-width:600px){
+    .map-search{
+      grid-template-columns:1fr;
+    }
+
+    #sodMap{
+      height:430px;
+    }
   }
 
   /* ---- Calculator ---- */
@@ -731,6 +883,10 @@
     .svc:hover,.btn:hover{ transform:none; }
   }
 </style>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.19.3/dist/leaflet-geoman.css" />
+
 </head>
 <body>
 
@@ -855,8 +1011,8 @@
               Get delivery pricing
             </button>
 
-            <a class="service-text-link" href="#estimate">
-              Use the sod calculator →
+            <a class="service-text-link" href="#measure-lawn">
+              Measure your lawn on the map →
             </a>
           </div>
         </div>
@@ -946,6 +1102,7 @@
 
   </div>
 </section>
+
 
 <!-- ===== Instant estimate ===== -->
 <section class="band-green" id="estimate">
@@ -1044,6 +1201,102 @@
       <div class="art reveal"><div class="top"></div><div class="body"><h3>What does a pallet of sod cost at a big-box store in Florida?</h3><p>A quick breakdown of Home Depot &amp; Lowe's pallet pricing — and why fresh-cut, installed sod from a local grower often costs less than DIY once you count waste, delivery, and labor.</p><a class="more" href="#">Read the breakdown →</a></div></div>
       <div class="art reveal"><div class="top"></div><div class="body"><h3>St. Augustine vs. Zoysia vs. Bahia: which grass for your Florida yard?</h3><p>How sun, shade, traffic, water, and budget decide the right variety — with honest trade-offs for each, for Southwest Florida lawns.</p><a class="more" href="#">Compare grasses →</a></div></div>
       <div class="art reveal"><div class="top"></div><div class="body"><h3>How much sod do I need? A simple way to measure.</h3><p>Measure any yard in minutes, avoid over- or under-ordering, and learn how much extra to add for irregular shapes and waste.</p><a class="more" href="#">Learn to measure →</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Map sod calculator ===== -->
+<section id="measure-lawn">
+  <div class="wrap">
+
+    <div class="sec-head center reveal">
+      <span class="eyebrow">Measure your lawn</span>
+      <h2>Outline your yard and calculate how much sod to order</h2>
+      <p>
+        Search for the property, draw around each lawn area on the aerial map,
+        and we’ll add 15% for cuts and waste before calculating full pallets.
+      </p>
+    </div>
+
+    <div class="map-calc-layout">
+
+      <div class="map-card reveal">
+        <div class="map-search">
+          <input
+            id="mapAddress"
+            type="search"
+            placeholder="Enter a property address"
+            autocomplete="street-address"
+            aria-label="Property address"
+          />
+          <button class="btn btn-blue" id="mapSearchBtn" type="button">
+            Find property
+          </button>
+        </div>
+
+        <div id="sodMap" aria-label="Interactive aerial map for outlining lawn areas"></div>
+
+        <div class="map-status" id="mapStatus">
+          Search for an address, then use the polygon tool on the map to outline the grass.
+        </div>
+      </div>
+
+      <aside class="map-results reveal">
+        <h3>Your sod estimate</h3>
+
+        <ol class="map-instructions">
+          <li>Search for the property address.</li>
+          <li>Select the polygon tool on the map.</li>
+          <li>Click around each lawn area, then click the first point to close it.</li>
+          <li>Draw additional sections for side yards or separate areas.</li>
+        </ol>
+
+        <div class="map-metric">
+          <span>Outlined lawn area</span>
+          <strong id="mapMeasuredSqFt">0 sq. ft.</strong>
+        </div>
+
+        <div class="map-metric">
+          <span>15% cuts and waste</span>
+          <strong id="mapWasteSqFt">0 sq. ft.</strong>
+        </div>
+
+        <div class="map-metric">
+          <span>Recommended sod</span>
+          <strong id="mapAdjustedSqFt">0 sq. ft.</strong>
+        </div>
+
+        <div class="map-metric primary">
+          <span>Recommended pallets</span>
+          <strong id="mapPallets">0</strong>
+        </div>
+
+        <div class="map-result-actions">
+          <button
+            class="btn btn-primary"
+            id="useMapEstimate"
+            type="button"
+            disabled
+          >
+            Use this estimate for delivery pricing
+          </button>
+
+          <button
+            class="btn btn-mini-ghost"
+            id="clearMapShapes"
+            type="button"
+          >
+            Clear outlined areas
+          </button>
+        </div>
+
+        <p class="map-disclaimer">
+          Satellite measurements are estimates. Trees, roof overhangs, image age,
+          slopes, beds, pools, and access conditions may affect the final order.
+          One pallet covers approximately 400 square feet.
+        </p>
+      </aside>
+
     </div>
   </div>
 </section>
@@ -1322,7 +1575,10 @@
     <div class="wz-success" id="deliverySuccess" style="display:none;">
       <div class="check">✓</div>
       <h3>Your delivery request was received.</h3>
-<p style="color:var(--ink-soft);"> We’ll confirm grass availability, delivery timing, and exact pricing with you. Or call <a href="tel:+18332474763" style="color:var(--green-d); font-weight:700;"> 833-247-4763 </a> to order now! </p>
+      <p style="color:var(--ink-soft);">
+        We’ll confirm grass availability, delivery timing, and exact pricing with you.
+        Or call <a href="tel:+18332474763" style="color:var(--green-d); font-weight:700;">833-247-4763</a> to order now.
+      </p>
       <button class="btn btn-mini-ghost" type="button" onclick="closeDeliveryWizard()" style="margin-top:.6rem;">Close</button>
     </div>
   </div>
@@ -1350,6 +1606,11 @@
   </div>
   <button class="fab-btn" id="fabBtn" onclick="toggleFab()" aria-label="Contact options">💬</button>
 </div>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@2.19.3/dist/leaflet-geoman.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@7.3.0/turf.min.js"></script>
 
 <script>
   // ---- header / nav ----
@@ -1470,6 +1731,219 @@
   }
   showStep(0);
 
+
+
+  // ---- MAP SOD CALCULATOR ----
+  const mapEl=document.getElementById('sodMap');
+  let sodMap=null;
+  let mapMeasuredSqFt=0;
+  let mapAdjustedSqFt=0;
+  let mapPalletCount=0;
+
+  function formatWholeNumber(value){
+    return Math.round(value).toLocaleString('en-US');
+  }
+
+  function updateMapTotals(){
+    if(!sodMap) return;
+
+    let totalSquareMeters=0;
+
+    sodMap.eachLayer(layer => {
+      if(layer instanceof L.Polygon && !(layer instanceof L.Rectangle)){
+        try{
+          totalSquareMeters += turf.area(layer.toGeoJSON());
+        }catch(error){
+          console.warn('Could not calculate polygon area:', error);
+        }
+      }
+
+      if(layer instanceof L.Rectangle){
+        try{
+          totalSquareMeters += turf.area(layer.toGeoJSON());
+        }catch(error){
+          console.warn('Could not calculate rectangle area:', error);
+        }
+      }
+    });
+
+    mapMeasuredSqFt=totalSquareMeters*10.7639104167;
+    const wasteSqFt=mapMeasuredSqFt*.15;
+    mapAdjustedSqFt=mapMeasuredSqFt+wasteSqFt;
+    mapPalletCount=mapAdjustedSqFt>0 ? Math.ceil(mapAdjustedSqFt/400) : 0;
+
+    document.getElementById('mapMeasuredSqFt').textContent=
+      `${formatWholeNumber(mapMeasuredSqFt)} sq. ft.`;
+
+    document.getElementById('mapWasteSqFt').textContent=
+      `${formatWholeNumber(wasteSqFt)} sq. ft.`;
+
+    document.getElementById('mapAdjustedSqFt').textContent=
+      `${formatWholeNumber(mapAdjustedSqFt)} sq. ft.`;
+
+    document.getElementById('mapPallets').textContent=
+      mapPalletCount.toLocaleString('en-US');
+
+    document.getElementById('useMapEstimate').disabled=mapPalletCount<1;
+  }
+
+  function initializeSodMap(){
+    if(!mapEl || typeof L==='undefined') return;
+
+    sodMap=L.map('sodMap',{
+      center:[27.3364,-82.5307],
+      zoom:12,
+      minZoom:4,
+      maxZoom:20
+    });
+
+    const mapboxLayer=L.tileLayer(
+      'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFydGhhanNvc2EiLCJhIjoiY21xbW1uNnE5MWVxdTJxcHpycXFzMjdmcCJ9.j64TWsKWJYXJodFdAPeweg',
+      {
+        tileSize:256,
+        maxZoom:20,
+        attribution:
+          '© <a href="https://www.mapbox.com/about/maps/" target="_blank" rel="noopener">Mapbox</a> ' +
+          '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
+      }
+    );
+
+    mapboxLayer.addTo(sodMap);
+
+    mapboxLayer.on('tileerror', () => {
+      document.getElementById('mapStatus').textContent=
+        'The satellite layer could not load. Check the Mapbox token URL restrictions and refresh the page.';
+    });
+
+    sodMap.pm.addControls({
+      position:'topleft',
+      drawMarker:false,
+      drawCircleMarker:false,
+      drawPolyline:false,
+      drawCircle:false,
+      drawText:false,
+      drawPolygon:true,
+      drawRectangle:true,
+      editMode:true,
+      dragMode:false,
+      cutPolygon:false,
+      removalMode:true,
+      rotateMode:false
+    });
+
+    sodMap.on('pm:create', event => {
+      event.layer.on('pm:edit', updateMapTotals);
+      updateMapTotals();
+    });
+
+    sodMap.on('pm:remove', updateMapTotals);
+    sodMap.on('pm:edit', updateMapTotals);
+
+    setTimeout(() => sodMap.invalidateSize(), 150);
+  }
+
+  async function searchMapAddress(){
+    const input=document.getElementById('mapAddress');
+    const status=document.getElementById('mapStatus');
+    const query=input.value.trim();
+
+    if(!query){
+      status.textContent='Enter a property address first.';
+      input.focus();
+      return;
+    }
+
+    status.textContent='Searching for the property…';
+    document.getElementById('mapSearchBtn').disabled=true;
+
+    try{
+      const endpoint=
+        'https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=us&q=' +
+        encodeURIComponent(query);
+
+      const response=await fetch(endpoint,{
+        headers:{'Accept':'application/json'}
+      });
+
+      if(!response.ok) throw new Error('Address search failed');
+
+      const results=await response.json();
+
+      if(!results.length){
+        status.textContent='We could not find that address. Try including the city, state, and ZIP code.';
+        return;
+      }
+
+      const result=results[0];
+      const lat=Number(result.lat);
+      const lon=Number(result.lon);
+
+      sodMap.setView([lat,lon],19);
+
+      status.textContent=
+        'Property found. Select the polygon tool, then click around each lawn area.';
+    }catch(error){
+      console.error(error);
+      status.textContent=
+        'The address search is temporarily unavailable. You can still move and zoom the map manually.';
+    }finally{
+      document.getElementById('mapSearchBtn').disabled=false;
+    }
+  }
+
+  document.getElementById('mapSearchBtn')?.addEventListener('click',searchMapAddress);
+
+  document.getElementById('mapAddress')?.addEventListener('keydown',event => {
+    if(event.key==='Enter'){
+      event.preventDefault();
+      searchMapAddress();
+    }
+  });
+
+  document.getElementById('clearMapShapes')?.addEventListener('click',() => {
+    if(!sodMap) return;
+
+    const removable=[];
+
+    sodMap.eachLayer(layer => {
+      if(layer instanceof L.Polygon || layer instanceof L.Rectangle){
+        removable.push(layer);
+      }
+    });
+
+    removable.forEach(layer => sodMap.removeLayer(layer));
+    updateMapTotals();
+
+    document.getElementById('mapStatus').textContent=
+      'Outlined areas cleared. Draw a new polygon when ready.';
+  });
+
+  document.getElementById('useMapEstimate')?.addEventListener('click',() => {
+    if(mapPalletCount<1) return;
+
+    openDeliveryWizard();
+
+    deliveryState.mode='pallets';
+    deliveryState.squareFeet=Math.round(mapAdjustedSqFt);
+    deliveryState.pallets=mapPalletCount;
+
+    document.querySelectorAll('.quantity-choice').forEach(button => {
+      button.classList.toggle('active',button.dataset.mode==='pallets');
+    });
+
+    document.getElementById('deliveryAreaFields').hidden=true;
+    document.getElementById('deliveryPalletFields').hidden=false;
+    document.getElementById('deliveryPallets').value=mapPalletCount;
+
+    document.getElementById('deliveryResult').textContent=
+      `${formatWholeNumber(mapMeasuredSqFt)} sq. ft. outlined, ` +
+      `${formatWholeNumber(mapAdjustedSqFt)} sq. ft. after the 15% allowance, ` +
+      `for approximately ${mapPalletCount} ${mapPalletCount===1?'pallet':'pallets'}.`;
+
+    document.getElementById('deliveryQuantityError').textContent='';
+  });
+
+  initializeSodMap();
 
   // ---- DELIVERY PRICING WIZARD ----
   const deliveryOverlay=document.getElementById('deliveryOverlay');
