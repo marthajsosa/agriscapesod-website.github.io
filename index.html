@@ -388,6 +388,8 @@
   }
 
   #sodMap{
+    position:relative;
+    z-index:0;
     height:520px;
     width:100%;
     background:#e8ece8;
@@ -573,7 +575,7 @@
   .reveal.in{ opacity:1; transform:none; }
 
   /* ======== WIZARD MODAL ======== */
-  .wz-overlay{ position:fixed; inset:0; z-index:200; background:rgba(10,30,50,.6); display:none; align-items:flex-start; justify-content:center; padding:4vh 16px; overflow-y:auto; }
+  .wz-overlay{ position:fixed; inset:0; z-index:5000; background:rgba(10,30,50,.6); display:none; align-items:flex-start; justify-content:center; padding:4vh 16px; overflow-y:auto; }
   .wz-overlay.open{ display:flex; }
   .wz{ background:#fff; width:100%; max-width:620px; border-radius:16px; overflow:hidden; box-shadow:0 30px 80px -30px rgba(0,0,0,.6); }
   .wz-head{ background:var(--blue-deep); color:#fff; padding:1rem 1.3rem; display:flex; align-items:center; justify-content:space-between; }
