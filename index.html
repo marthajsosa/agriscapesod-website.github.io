@@ -1255,7 +1255,7 @@
           </span>
         </a>
         <a class="nav-phone" href="tel:+18332474763">📞 833-247-4763</a>
-        <button class="btn btn-primary" onclick="openWizard()">Get pricing</button>
+        <button class="btn btn-primary" onclick="openWizard()">Schedule now</button>
         <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -1278,8 +1278,7 @@
       <h1>Fresh-cut sod, delivered or installed right.</h1>
       <p class="sub">From backyard lawn replacements to large commercial projects, AgriScape grows, delivers, and installs Florida sod across Southwest and Central Florida.</p>
       <div class="cta-row">
-        <button class="btn btn-primary" onclick="openDeliveryPricing()">Get delivery pricing</button>
-        <a class="btn btn-out-light" href="#measure-lawn">Measure my lawn</a>
+        <button class="btn btn-primary" onclick="openWizard()">Tell us about your project</button>
       </div>
       <p class="callline">Need help choosing? Call or text <a href="tel:+18332474763">833-247-4763</a>.</p>
     </div>
@@ -1451,7 +1450,7 @@
     <span class="eyebrow on-dark">Real crews. Real equipment.</span>
     <h2>Built for backyard jobs and large Florida projects.</h2>
     <p>AgriScape supports homeowners, contractors, developers, HOAs, and public-sector work with the crews, trucks, and equipment needed to handle projects of different sizes.</p>
-    <button class="btn btn-primary" onclick="openWizard()">Tell us about your project</button>
+    <button class="btn btn-primary" onclick="openWizard()">Schedule now</button>
   </div>
 </section>
 
@@ -1496,7 +1495,7 @@
       <span class="eyebrow">FAQ</span><h2>Good questions, straight answers.</h2>
     </div>
     <div class="faq reveal">
-      <details><summary>How much does sod cost in Florida?</summary><p>It depends on square footage and grass variety. Use the instant estimate above for a ballpark, then request a free quote for exact, confirmed pricing — including free local delivery.</p></details>
+      <details><summary>How much does sod cost in Florida?</summary><p>It depends on square footage and grass variety. Measure your lawn on the map for a planning quantity, then continue to delivery pricing or a rough installation estimate before requesting a confirmed quote.</p></details>
       <details><summary>Do you deliver and install, or just supply?</summary><p>Both. We grow, deliver, and install — including old turf removal and ground prep — or deliver fresh-cut sod by the pallet or truckload.</p></details>
       <details><summary>How fresh is the sod?</summary><p>It's cut to order and harvested within 24 hours of delivery, so it arrives fresh and ready to root.</p></details>
       <details><summary>Do you handle large commercial and government projects?</summary><p>Yes — we have the fleet and crews to serve HOAs, developers, contractors, and public infrastructure projects across Florida. See our Commercial &amp; Government page for capacity details.</p></details>
@@ -1511,9 +1510,10 @@
     <h2 class="reveal">Ready to plan your sod project?</h2>
     <p class="reveal">Measure the property, request pricing, or talk with our team about the right next step.</p>
     <div class="cta-row reveal">
-      <button class="btn btn-primary" onclick="openWizard()">Get pricing</button>
-      <a class="btn btn-out-light" href="tel:+18332474763">Call 833-247-4763</a>
+      <button class="btn btn-primary" onclick="openWizard()">Schedule now</button>
+      <a class="btn btn-out-light" href="#measure-lawn">Measure your lawn on the map</a>
     </div>
+    <p class="callline reveal" style="margin-top:1rem;">Prefer to talk? <a href="tel:+18332474763" style="color:#fff; font-weight:700; text-decoration:underline;">Call or text 833-247-4763</a>.</p>
   </div>
 </section>
 
@@ -1531,7 +1531,7 @@
       <div><h4>Hours</h4>
         <div class="hours-row"><span>Mon–Fri</span><span>8:00a – 5:00p</span></div>
         <div class="hours-row"><span>Sat–Sun</span><span>Closed</span></div>
-        <button class="btn btn-primary" style="margin-top:1rem;" onclick="openWizard()">Get pricing</button>
+        <button class="btn btn-primary" style="margin-top:1rem;" onclick="openWizard()">Schedule now</button>
       </div>
     </div>
     <div class="foot-bottom"><span>© 2025 AgriScape Sod Service — All rights reserved.</span><span><a href="#" style="display:inline;">Privacy Policy</a> · <a href="#" style="display:inline;">Terms</a></span></div>
@@ -1540,8 +1540,8 @@
 
 <!-- ===== Mobile sticky bar ===== -->
 <div class="mobile-bar">
-  <a class="btn btn-out-light" href="tel:+18332474763" style="border-color:rgba(255,255,255,.6);">Call</a>
-  <button class="btn btn-primary" onclick="openWizard()">Get pricing</button>
+  <button class="btn btn-primary" onclick="openWizard()">Schedule now</button>
+  <a class="btn btn-out-light" href="#measure-lawn" style="border-color:rgba(255,255,255,.6);">Measure lawn</a>
 </div>
 
 <!-- ===== SCHEDULE / SERVICE ROUTER MODAL ===== -->
@@ -1549,8 +1549,8 @@
   <div class="wz">
     <div class="wz-head">
       <div>
-        <div class="t" id="wzTitle">How can we help?</div>
-        <div class="s">Choose a service and we’ll point you to the right next step</div>
+        <div class="t" id="wzTitle">Schedule now</div>
+        <div class="s">Choose delivery, installation, or help deciding, then enter the project ZIP</div>
       </div>
       <button class="wz-close" type="button" onclick="closeWizard()" aria-label="Close">×</button>
     </div>
@@ -2372,20 +2372,22 @@
       maxZoom:20
     });
 
-    const satelliteLayer=L.tileLayer(
-      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    const mapboxLayer=L.tileLayer(
+      'https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFydGhhanNvc2EiLCJhIjoiY21xbW1uNnE5MWVxdTJxcHpycXFzMjdmcCJ9.j64TWsKWJYXJodFdAPeweg',
       {
+        tileSize:256,
         maxZoom:20,
         attribution:
-          'Tiles © Esri, Maxar, Earthstar Geographics, and the GIS User Community'
+          '© <a href="https://www.mapbox.com/about/maps/" target="_blank" rel="noopener">Mapbox</a> ' +
+          '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
       }
     );
 
-    satelliteLayer.addTo(sodMap);
+    mapboxLayer.addTo(sodMap);
 
-    satelliteLayer.on('tileerror', () => {
+    mapboxLayer.on('tileerror', () => {
       document.getElementById('mapStatus').textContent=
-        'The satellite layer could not load. Refresh the page or try again in a moment.';
+        'The satellite layer could not load. Check the Mapbox token URL restrictions and refresh the page.';
     });
 
     sodMap.pm.addControls({
@@ -2813,6 +2815,15 @@
     pallets:0,
     zip:''
   };
+
+  // Backward-compatible names used by existing buttons and links.
+  function openDeliveryPricing(){
+    openDeliveryWizard();
+  }
+
+  function openInstallationEstimate(){
+    openInstallationWizard(Math.round(mapMeasuredSqFt || 0));
+  }
 
   function openDeliveryWizard(){
     const zipToReuse=savedProjectZip;
