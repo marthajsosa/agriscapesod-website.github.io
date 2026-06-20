@@ -822,6 +822,34 @@
     }
   }
 
+
+  .wz-route{ display:grid; gap:1rem; }
+  .wz-route-card{
+    padding:1rem;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--tint-green);
+  }
+  .wz-route-card h4{
+    margin:0 0 .35rem;
+    color:var(--blue-deep);
+    font-family:var(--display);
+    font-size:1.1rem;
+  }
+  .wz-route-card p{ margin:0; color:var(--ink-soft); }
+  .wz-route-actions{ display:grid; gap:.7rem; }
+  .wz-route-actions .btn{
+    width:100%;
+    white-space:normal;
+    text-align:center;
+  }
+  .wz-route-note{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:.8rem;
+    line-height:1.45;
+  }
+
   /* ======== COOKIE BANNER ======== */
   .cookie{ position:fixed; bottom:0; left:0; right:0; z-index:150; background:#fff; border-top:1px solid var(--line); box-shadow:0 -10px 30px -20px rgba(0,0,0,.4); padding:1rem var(--pad); display:none; }
   .cookie.show{ display:block; }
@@ -1044,7 +1072,7 @@
     </div>
     <nav class="nav-row" id="navRow">
       <a href="#services">Services</a>
-      <a href="#estimate">Instant Estimate</a>
+      <a href="#measure-lawn">Measure Your Lawn</a>
       <a href="#coverage">Service Area</a>
       <a href="#reviews">Reviews</a>
       <a href="#articles">Resources</a>
@@ -1069,7 +1097,7 @@
     <p class="sub">From a single backyard to statewide projects — AgriScape grows, delivers, and installs premium sod across Southwest and Central Florida. Family-owned since 2012. Tell us about your project and get a fast, free quote.</p>
     <div class="cta-row">
       <button class="btn btn-primary" onclick="openWizard()">Schedule now</button>
-      <a class="btn btn-out-light" href="#estimate">Get an instant estimate</a>
+      <a class="btn btn-out-light" href="#measure-lawn">Measure your lawn on the map</a>
     </div>
     <p class="callline">Prefer to talk? Call or text <a href="tel:+18332474763">833-247-4763</a> — we respond fast.</p>
   </div></div>
@@ -1210,8 +1238,8 @@
               Request an installation quote
             </button>
 
-            <a class="service-text-link" href="#estimate">
-              Estimate your project size →
+            <a class="service-text-link" href="#measure-lawn">
+              Measure your lawn on the map →
             </a>
           </div>
         </div>
@@ -1526,78 +1554,62 @@
   <button class="btn btn-primary" onclick="openWizard()">Schedule now</button>
 </div>
 
-<!-- ===== WIZARD MODAL ===== -->
-<div class="wz-overlay" id="wzOverlay" role="dialog" aria-modal="true" aria-label="Schedule your free estimate">
+<!-- ===== SCHEDULE / SERVICE ROUTER MODAL ===== -->
+<div class="wz-overlay" id="wzOverlay" role="dialog" aria-modal="true" aria-labelledby="wzTitle">
   <div class="wz">
     <div class="wz-head">
-      <div><div class="t">Schedule your free estimate</div><div class="s">Takes about 30 seconds</div></div>
-      <button class="wz-close" onclick="closeWizard()" aria-label="Close">×</button>
+      <div>
+        <div class="t" id="wzTitle">How can we help?</div>
+        <div class="s">Choose a service and we’ll point you to the right next step</div>
+      </div>
+      <button class="wz-close" type="button" onclick="closeWizard()" aria-label="Close">×</button>
     </div>
+
     <div class="wz-steps" id="wzSteps">
       <div class="wz-step active" data-step="0"><div class="dot">1</div><div class="lab">Service</div></div>
       <div class="wz-step" data-step="1"><div class="dot">2</div><div class="lab">Location</div></div>
-      <div class="wz-step" data-step="2"><div class="dot">3</div><div class="lab">Schedule</div></div>
+      <div class="wz-step" data-step="2"><div class="dot">3</div><div class="lab">Next step</div></div>
     </div>
 
     <div class="wz-body" id="wzBody">
-      <!-- Step 1: Service -->
       <div class="wz-panel show" data-panel="0">
         <h3>What do you need?</h3>
         <div class="opt-grid">
-          <div class="opt" data-service="Sod delivery"><span class="oic">🚚</span>Delivery</div>
-          <div class="opt" data-service="Sod installation"><span class="oic">🌱</span>Installation</div>
-          <div class="opt" data-service="Residential lawn"><span class="oic">🏡</span>Residential</div>
-          <div class="opt" data-service="Commercial / government"><span class="oic">🏗️</span>Commercial</div>
-          <div class="opt" data-service="Not sure yet" style="grid-column:1 / -1;"><span class="oic">💬</span>Not sure yet — help me decide</div>
+          <button class="opt" type="button" data-service="delivery">
+            <span class="oic">🚚</span>Delivery
+          </button>
+
+          <button class="opt" type="button" data-service="installation">
+            <span class="oic">🌱</span>Installation
+          </button>
+
+          <button class="opt" type="button" data-service="unsure" style="grid-column:1 / -1;">
+            <span class="oic">💬</span>Not sure yet — help me decide
+          </button>
         </div>
       </div>
-      <!-- Step 2: Location -->
+
       <div class="wz-panel" data-panel="1">
-        <h3>Where's the project?</h3>
+        <h3>Where is the project?</h3>
         <label for="wzZip">ZIP code</label>
         <input id="wzZip" type="text" inputmode="numeric" maxlength="5" placeholder="e.g. 34205" />
         <div class="zipmsg" id="wzZipMsg"></div>
       </div>
-      <!-- Step 3: Schedule -> funnel to call -->
+
       <div class="wz-panel" data-panel="2">
-        <h3>When works for you?</h3>
-        <div class="datestrip" id="wzDays" aria-hidden="true"></div>
-        <div class="slot-msg">
-          <div class="cal">📅</div>
-          <!-- Funnel-to-call copy. Edit freely. -->
-          <p>We don't show live time slots online — give us a quick call and we'll lock in your free estimate right now.</p>
-          <div class="phone">833-247-4763</div>
-          <a class="btn btn-primary" href="tel:+18332474763">📞 Call to schedule</a>
-        </div>
-        <div class="callback">
-          <p style="font-weight:600; color:var(--blue-deep); margin:0 0 .7rem;">Prefer we call you? Leave your info:</p>
-          <div class="row2">
-            <div><label for="wzName">Name</label><input id="wzName" type="text" /></div>
-            <div><label for="wzPhone">Phone</label><input id="wzPhone" type="tel" /></div>
-          </div>
-          <button class="btn btn-blue" style="width:100%; margin-top:.8rem;" onclick="submitCallback()">Have us call you</button>
-        </div>
+        <div class="wz-route" id="wzRouteResult"></div>
       </div>
     </div>
 
     <div class="wz-foot" id="wzFoot">
-      <a class="callrep" href="tel:+18332474763">📞 Tap to speak with us</a>
+      <a class="callrep" href="tel:+18332474763">📞 Call 833-247-4763</a>
       <div>
-        <button class="btn btn-mini-ghost" id="wzBack" onclick="wzPrev()" style="display:none;">Back</button>
-        <button class="btn btn-primary" id="wzNext" onclick="wzNext()">Continue</button>
+        <button class="btn btn-mini-ghost" id="wzBack" type="button" onclick="wzPrev()" style="display:none;">Back</button>
+        <button class="btn btn-primary" id="wzNext" type="button" onclick="wzNext()">Continue</button>
       </div>
-    </div>
-
-    <!-- Success (callback submitted) -->
-    <div class="wz-success" id="wzSuccess" style="display:none;">
-      <div class="check">✓</div>
-      <h3>Got it — we'll call you shortly!</h3>
-      <p style="color:var(--ink-soft);">During business hours we respond fast. Need it now? Call <a href="tel:+18332474763" style="color:var(--green-d); font-weight:700;">833-247-4763</a>.</p>
-      <button class="btn btn-mini-ghost" onclick="closeWizard()" style="margin-top:.6rem;">Close</button>
     </div>
   </div>
 </div>
-
 
 <!-- ===== DELIVERY PRICING MODAL ===== -->
 <div class="wz-overlay" id="deliveryOverlay" role="dialog" aria-modal="true" aria-labelledby="deliveryTitle">
@@ -1815,92 +1827,244 @@
   }
   sqftEl.addEventListener('input', calc); grassEl.addEventListener('change', calc);
 
-  // ---- WIZARD ----
+  // ---- SCHEDULE / SERVICE ROUTER ----
   const overlay=document.getElementById('wzOverlay');
-  let wzStep=0; const WZ_MAX=2;
-  const state={service:'', zip:''};
+  let wzStep=0;
+  const WZ_MAX=2;
+  const state={service:'',zip:'',residential:false};
+  let savedProjectZip='';
+  const residentialZipPrefixes=['342','341','339','340'];
+
   function openWizard(type=''){
-    document.getElementById('wzBody').style.display='';
-    document.getElementById('wzSteps').style.display='';
-    document.getElementById('wzFoot').style.display='';
-    document.getElementById('wzSuccess').style.display='none';
+    state.service='';
+    state.zip=savedProjectZip;
+    state.residential=savedProjectZip
+      ? residentialZipPrefixes.includes(savedProjectZip.slice(0,3))
+      : false;
+
+    document.getElementById('wzZip').value=savedProjectZip;
+    document.getElementById('wzRouteResult').innerHTML='';
+
+    const zipMessage=document.getElementById('wzZipMsg');
+
+    if(savedProjectZip){
+      zipMessage.className=state.residential?'zipmsg ok':'zipmsg warn';
+      zipMessage.textContent=state.residential
+        ? '✓ This ZIP code is already saved and appears to be in our residential service area.'
+        : 'This ZIP code is already saved. We’ll confirm service availability.';
+    }else{
+      zipMessage.textContent='';
+    }
+
+    document.querySelectorAll('#wzOverlay .opt').forEach(option => {
+      option.classList.remove('sel');
+    });
 
     if(type==='installation'){
-      state.service='Sod installation';
-      document.querySelectorAll('#wzOverlay .opt').forEach(x => {
-        x.classList.toggle('sel', x.dataset.service==='Sod installation');
-      });
-      showStep(1);
-    } else {
-      state.service='';
-      document.querySelectorAll('#wzOverlay .opt').forEach(x => x.classList.remove('sel'));
+      state.service='installation';
+      document.querySelector('#wzOverlay .opt[data-service="installation"]')?.classList.add('sel');
+
+      if(savedProjectZip){
+        buildWizardRoute();
+        showStep(2);
+      }else{
+        showStep(1);
+      }
+    }else if(type==='delivery'){
+      state.service='delivery';
+      document.querySelector('#wzOverlay .opt[data-service="delivery"]')?.classList.add('sel');
+
+      if(savedProjectZip){
+        buildWizardRoute();
+        showStep(2);
+      }else{
+        showStep(1);
+      }
+    }else{
       showStep(0);
     }
 
     overlay.classList.add('open');
     document.body.style.overflow='hidden';
   }
-  function closeWizard(){ overlay.classList.remove('open'); document.body.style.overflow=''; }
-  overlay.addEventListener('click', e => { if(e.target===overlay) closeWizard(); });
-  document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.classList.contains('open')) closeWizard(); });
 
-  // service selection
-  document.querySelectorAll('#wzOverlay .opt').forEach(o => o.addEventListener('click', () => {
-    document.querySelectorAll('#wzOverlay .opt').forEach(x => x.classList.remove('sel'));
-    o.classList.add('sel'); state.service=o.dataset.service;
-  }));
-
-  // build the (disabled) date strip
-  (function(){
-    const wrap=document.getElementById('wzDays'); const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-    const today=new Date();
-    for(let k=0;k<6;k++){ const d=new Date(today); d.setDate(today.getDate()+k);
-      const p=document.createElement('div'); p.className='daypill';
-      p.innerHTML='<small>'+(k===0?'Today':k===1?'Tom':days[d.getDay()])+'</small><b>'+d.getDate()+'</b>';
-      wrap.appendChild(p);
-    }
-  })();
-
-  function showStep(n){
-    wzStep=n;
-    document.querySelectorAll('.wz-panel').forEach(p => p.classList.toggle('show', +p.dataset.panel===n));
-    document.querySelectorAll('.wz-step').forEach(s => { const i=+s.dataset.step;
-      s.classList.toggle('active', i===n); s.classList.toggle('done', i<n); });
-    document.getElementById('wzBack').style.display = n>0 ? 'inline-flex' : 'none';
-    document.getElementById('wzNext').style.display = n<WZ_MAX ? 'inline-flex' : 'none';
+  function closeWizard(){
+    overlay.classList.remove('open');
+    document.body.style.overflow='';
   }
-  function wzPrev(){ if(wzStep>0) showStep(wzStep-1); }
-  function wzNext(){
-    if(wzStep===0 && !state.service){ alert('Please choose what you need.'); return; }
-    if(wzStep===1){
-      const z=document.getElementById('wzZip').value.trim();
-      if(!/^\d{5}$/.test(z)){ alert('Please enter a 5-digit ZIP code.'); return; }
-      state.zip=z;
-    }
-    if(wzStep<WZ_MAX) showStep(wzStep+1);
-  }
-  // friendly (cosmetic) service-area check by ZIP prefix
-  document.getElementById('wzZip').addEventListener('input', function(){
-    const z=this.value.trim(), msg=document.getElementById('wzZipMsg');
-    if(!/^\d{5}$/.test(z)){ msg.textContent=''; return; }
-    const p=z.slice(0,3);
-    const res=['342','341','339','340'], com=['336','335','337','338','328','329','346','347'];
-    if(res.includes(p)){ msg.className='zipmsg ok'; msg.textContent='✓ Great — you\u2019re in our residential service area.'; }
-    else if(com.includes(p)){ msg.className='zipmsg ok'; msg.textContent='✓ We cover this area for commercial & larger projects.'; }
-    else { msg.className='zipmsg warn'; msg.textContent='We may still be able to help — continue and we\u2019ll confirm.'; }
+
+  overlay.addEventListener('click',event => {
+    if(event.target===overlay) closeWizard();
   });
-  function submitCallback(){
-    const n=document.getElementById('wzName').value.trim(), ph=document.getElementById('wzPhone').value.trim();
-    if(!n || !ph){ alert('Please add your name and phone so we can call you.'); return; }
-    /* >>> PRODUCTION: POST {state, name, phone} to your handler, FIRE the
-       Google Ads conversion, and send an INSTANT notification/auto-text. */
-    document.getElementById('wzBody').style.display='none';
-    document.getElementById('wzSteps').style.display='none';
-    document.getElementById('wzFoot').style.display='none';
-    document.getElementById('wzSuccess').style.display='block';
-  }
-  showStep(0);
 
+  document.addEventListener('keydown',event => {
+    if(event.key==='Escape' && overlay.classList.contains('open')){
+      closeWizard();
+    }
+  });
+
+  document.querySelectorAll('#wzOverlay .opt').forEach(option => {
+    option.addEventListener('click',() => {
+      document.querySelectorAll('#wzOverlay .opt').forEach(item => item.classList.remove('sel'));
+      option.classList.add('sel');
+      state.service=option.dataset.service;
+    });
+  });
+
+  function showStep(step){
+    wzStep=step;
+
+    document.querySelectorAll('#wzOverlay .wz-panel').forEach(panel => {
+      panel.classList.toggle('show',Number(panel.dataset.panel)===step);
+    });
+
+    document.querySelectorAll('#wzOverlay .wz-step').forEach(marker => {
+      const markerStep=Number(marker.dataset.step);
+      marker.classList.toggle('active',markerStep===step);
+      marker.classList.toggle('done',markerStep<step);
+    });
+
+    document.getElementById('wzBack').style.display=step>0?'inline-flex':'none';
+    document.getElementById('wzNext').style.display=step<WZ_MAX?'inline-flex':'none';
+  }
+
+  function wzPrev(){
+    if(wzStep>0) showStep(wzStep-1);
+  }
+
+  function wzNext(){
+    if(wzStep===0){
+      if(!state.service){
+        alert('Please choose delivery, installation, or “Not sure yet.”');
+        return;
+      }
+      showStep(1);
+      return;
+    }
+
+    if(wzStep===1){
+      const zip=document.getElementById('wzZip').value.trim();
+
+      if(!/^\d{5}$/.test(zip)){
+        alert('Please enter a valid 5-digit ZIP code.');
+        return;
+      }
+
+      state.zip=zip;
+      savedProjectZip=zip;
+      state.residential=residentialZipPrefixes.includes(zip.slice(0,3));
+      buildWizardRoute();
+      showStep(2);
+    }
+  }
+
+  document.getElementById('wzZip').addEventListener('input',function(){
+    const zip=this.value.trim();
+    const message=document.getElementById('wzZipMsg');
+
+    if(!/^\d{5}$/.test(zip)){
+      message.textContent='';
+      return;
+    }
+
+    if(residentialZipPrefixes.includes(zip.slice(0,3))){
+      message.className='zipmsg ok';
+      message.textContent='✓ This appears to be in our residential service area.';
+    }else{
+      message.className='zipmsg warn';
+      message.textContent='We’ll need to confirm service availability for this ZIP code.';
+    }
+  });
+
+  function scrollToMapFromWizard(){
+    closeWizard();
+
+    setTimeout(() => {
+      document.getElementById('measure-lawn')?.scrollIntoView({
+        behavior:'smooth',
+        block:'start'
+      });
+
+      setTimeout(() => {
+        if(typeof sodMap!=='undefined' && sodMap){
+          sodMap.invalidateSize();
+        }
+      },500);
+    },100);
+  }
+
+  function buildWizardRoute(){
+    const result=document.getElementById('wzRouteResult');
+
+    if(state.service==='delivery' && state.residential){
+      result.innerHTML=`
+        <div class="wz-route-card">
+          <h4>Delivery is available in your area</h4>
+          <p>Measure the lawn on the map, choose the grass type, and carry the calculated square footage and pallet count into the delivery-pricing flow.</p>
+        </div>
+        <div class="wz-route-actions">
+          <button class="btn btn-primary" type="button" onclick="scrollToMapFromWizard()">Measure your lawn on the map</button>
+          <a class="btn btn-blue" href="tel:+18332474763">Call 833-247-4763 to order now</a>
+        </div>
+        <p class="wz-route-note">Map measurements and emailed pricing are estimates. Grass availability, delivery timing, site access, and final order details must be confirmed.</p>
+      `;
+      return;
+    }
+
+    if(state.service==='delivery'){
+      result.innerHTML=`
+        <div class="wz-route-card">
+          <h4>Let’s confirm delivery availability</h4>
+          <p>This ZIP code is outside the automatic residential service-area check. Call us and we’ll confirm whether delivery is available and what minimums apply.</p>
+        </div>
+        <div class="wz-route-actions">
+          <a class="btn btn-primary" href="tel:+18332474763">Call 833-247-4763</a>
+        </div>
+      `;
+      return;
+    }
+
+    if(state.service==='installation' && state.residential){
+      result.innerHTML=`
+        <div class="wz-route-card">
+          <h4>Installation is available in your area</h4>
+          <p>Speak with our team to schedule a free on-site measurement and exact quote, or outline the lawn on the map first for a rough planning estimate.</p>
+        </div>
+        <div class="wz-route-actions">
+          <a class="btn btn-primary" href="tel:+18332474763">Call for a free on-site consultation</a>
+          <button class="btn btn-blue" type="button" onclick="scrollToMapFromWizard()">Get a ballpark estimate with the map</button>
+        </div>
+        <p class="wz-route-note">The map result is not a final installation quote. Removal, grading, drainage, irrigation, access, septic systems, soil, roots, obstacles, disposal, and verified measurements can change final pricing.</p>
+      `;
+      return;
+    }
+
+    if(state.service==='installation'){
+      result.innerHTML=`
+        <div class="wz-route-card">
+          <h4>Let’s confirm installation coverage</h4>
+          <p>Call our team so we can confirm whether the project is within our installation area and discuss the property.</p>
+        </div>
+        <div class="wz-route-actions">
+          <a class="btn btn-primary" href="tel:+18332474763">Call 833-247-4763</a>
+        </div>
+      `;
+      return;
+    }
+
+    result.innerHTML=`
+      <div class="wz-route-card">
+        <h4>We’ll help you choose the right path</h4>
+        <p>Call us and tell us about the property. We’ll help determine the grass type, whether delivery or installation makes more sense, and what to do next.</p>
+      </div>
+      <div class="wz-route-actions">
+        <a class="btn btn-primary" href="tel:+18332474763">Call 833-247-4763 for help</a>
+        ${state.residential ? `<button class="btn btn-blue" type="button" onclick="scrollToMapFromWizard()">Start by measuring the lawn</button>` : ''}
+      </div>
+    `;
+  }
+
+  showStep(0);
 
 
   // ---- MAP SOD CALCULATOR ----
@@ -2144,7 +2308,22 @@
   };
 
   function openDeliveryWizard(){
+    const zipToReuse=savedProjectZip;
     resetDeliveryWizard();
+
+    if(zipToReuse){
+      deliveryState.zip=zipToReuse;
+      document.getElementById('deliveryZip').value=zipToReuse;
+
+      const message=document.getElementById('deliveryZipMsg');
+      const isResidential=residentialZipPrefixes.includes(zipToReuse.slice(0,3));
+
+      message.className=isResidential?'zipmsg ok':'zipmsg warn';
+      message.textContent=isResidential
+        ? '✓ We carried over the ZIP code you already entered.'
+        : 'We carried over your ZIP code and will confirm delivery availability.';
+    }
+
     deliveryOverlay.classList.add('open');
     document.body.style.overflow='hidden';
   }
@@ -2376,6 +2555,7 @@
         return;
       }
       deliveryState.zip=zip;
+      savedProjectZip=zip;
     }
 
     if(deliveryStep===DELIVERY_MAX){
