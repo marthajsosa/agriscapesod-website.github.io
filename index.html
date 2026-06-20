@@ -698,77 +698,95 @@
   <div class="stat"><b>Right grass</b><span>Matched to your yard</span></div>
 </div></div>
 
+```html
 <!-- ===== Services ===== -->
 <section id="services">
   <div class="wrap">
 
     <div class="sec-head center reveal">
-      <h2>Choose delivery or full-service installation</h2>
+      <h2>Choose sod delivery or full-service installation</h2>
       <p>
-        Order fresh-cut sod for your own project or let AgriScape handle the
-        removal, preparation, delivery, and installation.
+        Order fresh-cut sod for your own project, or let AgriScape handle
+        everything from lawn removal and ground preparation to installation
+        and cleanup.
       </p>
     </div>
 
     <div class="service-paths">
 
+      <!-- Sod delivery -->
       <article class="service-path reveal">
-        <div class="service-path-icon" aria-hidden="true">🚚</div>
+        <div class="service-path-icon" aria-hidden="true">
+          🚚
+        </div>
 
         <div class="service-path-content">
           <span class="service-label">Sod delivery</span>
+
           <h3>Need fresh sod delivered?</h3>
 
           <p>
-            Order Florida-grown sod by the pallet or truckload for your own
-            crew, contractor, or do-it-yourself installation.
+            Choose your grass, calculate how many pallets you need, and request
+            delivery pricing for your home, crew, or contractor.
           </p>
 
           <ul class="service-points">
-            <li>Harvested within 24 hours</li>
+            <li>Florida-grown and freshly harvested</li>
             <li>Free local delivery</li>
-            <li>Multiple Florida grass varieties</li>
-            <li>Residential and commercial quantities</li>
+            <li>Several Florida grass varieties</li>
+            <li>One pallet covers approximately 400 square feet</li>
           </ul>
 
           <div class="service-actions">
-            <button class="btn btn-primary" type="button" onclick="openWizard()">
+            <button
+              class="btn btn-primary"
+              type="button"
+              onclick="openDeliveryWizard()"
+            >
               Get delivery pricing
             </button>
 
             <a class="service-text-link" href="#estimate">
-              Calculate how much sod you need →
+              Use the sod calculator →
             </a>
           </div>
         </div>
       </article>
 
+      <!-- Full-service installation -->
       <article class="service-path featured reveal">
-        <div class="service-path-icon" aria-hidden="true">🌱</div>
+        <div class="service-path-icon" aria-hidden="true">
+          🌱
+        </div>
 
         <div class="service-path-content">
           <span class="service-label">Full-service installation</span>
+
           <h3>Want us to handle the whole project?</h3>
 
           <p>
-            We remove the old lawn, prepare the ground, deliver fresh sod,
-            install it properly, and clean up when the job is done.
+            Tell us about your property and we’ll prepare an installation quote
+            based on the lawn size, existing conditions, grass type, and access.
           </p>
 
           <ul class="service-points">
-            <li>Existing turf removal</li>
+            <li>Existing lawn removal</li>
             <li>Ground preparation and grading</li>
             <li>Fresh sod delivery</li>
             <li>Professional installation and cleanup</li>
           </ul>
 
           <div class="service-actions">
-            <button class="btn btn-blue" type="button" onclick="openWizard()">
+            <button
+              class="btn btn-blue"
+              type="button"
+              onclick="openWizard('installation')"
+            >
               Request an installation quote
             </button>
 
             <a class="service-text-link" href="#estimate">
-              Get an installation estimate →
+              Estimate your project size →
             </a>
           </div>
         </div>
@@ -776,35 +794,41 @@
 
     </div>
 
+    <!-- Customer types -->
     <div class="customer-types reveal">
+
       <div class="customer-types-heading">
-        <span class="eyebrow">Who we work with</span>
-        <h3>Projects of every size</h3>
+        <span class="eyebrow">Serving Southwest Florida</span>
+        <h3>Residential and commercial sod projects</h3>
       </div>
 
       <div class="customer-type-grid">
 
         <a class="customer-type" href="#">
           <span class="customer-type-icon" aria-hidden="true">🏡</span>
+
           <span>
             <strong>Homeowners</strong>
             <small>
-              New lawns, replacements, sod delivery, and installation across
-              our Southwest Florida residential service area.
+              Sod delivery, lawn replacement, and full-service installation for
+              homes throughout our local service area.
             </small>
           </span>
+
           <span class="customer-arrow" aria-hidden="true">→</span>
         </a>
 
         <a class="customer-type" href="#">
           <span class="customer-type-icon" aria-hidden="true">🏗️</span>
+
           <span>
             <strong>Commercial and government</strong>
             <small>
-              Sod supply and installation for HOAs, developers, contractors,
+              Sod supply and installation for contractors, HOAs, developers,
               municipalities, and large-scale projects.
             </small>
           </span>
+
           <span class="customer-arrow" aria-hidden="true">→</span>
         </a>
 
@@ -813,6 +837,8 @@
 
   </div>
 </section>
+```
+
 
 <!-- ===== Instant estimate ===== -->
 <section class="band-green" id="estimate">
