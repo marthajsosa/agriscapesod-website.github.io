@@ -110,9 +110,9 @@
   .ticker a{ font-weight:700; color:#bfe3fb; }
 
   /* ---- Header ---- */
-  header.nav{ position:sticky; top:0; z-index:60; background:#fff; border-bottom:1px solid var(--line); }
+  header.nav{ position:sticky; top:0; z-index:60; background:#fff; border-bottom:1px solid var(--line); box-shadow:0 4px 14px rgba(10,58,99,.08); }
   .nav-top{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-block:.5rem; }
-  .brand img{ height:48px; width:auto; }
+  .brand img{ height:56px; width:auto; }
   .nav-actions{ display:flex; align-items:center; gap:1rem; }
   .gbadge{ display:flex; align-items:center; gap:.5rem; padding:.3rem .6rem; border:1px solid var(--line); border-radius:10px; }
   .gbadge .glogo{ font-family:var(--display); font-weight:800; font-size:1.1rem; color:#4285F4; }
@@ -1028,7 +1028,7 @@
   }
 
   .brand img{
-    height:38px;
+    height:44px;
   }
 
   .nav-actions{
@@ -1284,6 +1284,7 @@
     </div>
     <div class="hero-photo reveal" aria-label="AgriScape sod project photo placeholder">
       <img src="images/hero-sod.jpg" alt="Freshly installed Florida sod project" />
+      <div class="hero-photo-note">Freshly harvested. Professionally handled. Ready to root.</div>
     </div>
   </div>
 </section>
@@ -1352,34 +1353,6 @@
         </div>
       </article>
     </div>
-  </div>
-</section>
-
-<!-- ===== Proof of scale ===== -->
-<section class="scale-proof">
-  <div class="scale-photo"><img src="images/team-fleet.jpg" alt="AgriScape team, trucks, and equipment" /></div>
-  <div class="wrap scale-copy reveal">
-    <span class="eyebrow on-dark">Real crews. Real equipment.</span>
-    <h2>Built for backyard jobs and large Florida projects.</h2>
-    <p>AgriScape supports homeowners, contractors, developers, HOAs, and public-sector work with the crews, trucks, and equipment needed to handle projects of different sizes.</p>
-    <button class="btn btn-primary" onclick="openWizard()">Schedule now</button>
-  </div>
-</section>
-
-<!-- ===== Reviews ===== -->
-<section class="band-blue" id="reviews">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Reviews</span>
-      <h2>Trusted across Florida.</h2>
-      <p>From single-yard replacements to statewide builds. <a href="https://www.google.com/maps?cid=3443456827260833520" target="_blank" rel="noopener" style="color:var(--blue); font-weight:700;">Read our Google reviews →</a></p>
-    </div>
-    <div class="reviews" id="reviewsGrid">
-      <div class="review reveal"><div class="stars">★★★★★</div><p>"On time, freshest sod I've seen, and the yard looks incredible. Couldn't be happier."</p><div class="who">[ Sample review ]<small>Replace with a real Google review</small></div></div>
-      <div class="review reveal"><div class="stars">★★★★★</div><p>"Great pricing, fast delivery, and they helped me pick the right grass for a shady yard."</p><div class="who">[ Sample review ]<small>Replace with a real Google review</small></div></div>
-      <div class="review reveal"><div class="stars">★★★★★</div><p>"We use AgriScape on our community builds — consistent quality and a team that shows up."</p><div class="who">[ Sample review ]<small>Replace with a real Google review</small></div></div>
-    </div>
-    <p class="note reveal" id="reviewsNote">⚑ Placeholders until your live Google feed is connected (see google-reviews.php). Once live, real reviews replace these automatically.</p>
   </div>
 </section>
 
@@ -1467,6 +1440,34 @@
       </svg>
       <div class="map-legend"><span><i class="legend-core"></i>Residential core</span><span><i class="legend-project"></i>Commercial by project</span></div>
     </div>
+  </div>
+</section>
+
+<!-- ===== Proof of scale ===== -->
+<section class="scale-proof">
+  <div class="scale-photo"><img src="images/team-fleet.jpg" alt="AgriScape team, trucks, and equipment" /></div>
+  <div class="wrap scale-copy reveal">
+    <span class="eyebrow on-dark">Real crews. Real equipment.</span>
+    <h2>Built for backyard jobs and large Florida projects.</h2>
+    <p>AgriScape supports homeowners, contractors, developers, HOAs, and public-sector work with the crews, trucks, and equipment needed to handle projects of different sizes.</p>
+    <button class="btn btn-primary" onclick="openWizard()">Schedule now</button>
+  </div>
+</section>
+
+<!-- ===== Reviews ===== -->
+<section class="band-blue" id="reviews">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Reviews</span>
+      <h2>Trusted across Florida.</h2>
+      <p>From single-yard replacements to statewide builds. <a href="https://www.google.com/maps?cid=3443456827260833520" target="_blank" rel="noopener" style="color:var(--blue); font-weight:700;">Read our Google reviews →</a></p>
+    </div>
+    <div class="reviews" id="reviewsGrid">
+      <div class="review reveal"><div class="stars">★★★★★</div><p>"On time, freshest sod I've seen, and the yard looks incredible. Couldn't be happier."</p><div class="who">[ Sample review ]<small>Replace with a real Google review</small></div></div>
+      <div class="review reveal"><div class="stars">★★★★★</div><p>"Great pricing, fast delivery, and they helped me pick the right grass for a shady yard."</p><div class="who">[ Sample review ]<small>Replace with a real Google review</small></div></div>
+      <div class="review reveal"><div class="stars">★★★★★</div><p>"We use AgriScape on our community builds — consistent quality and a team that shows up."</p><div class="who">[ Sample review ]<small>Replace with a real Google review</small></div></div>
+    </div>
+    <p class="note reveal" id="reviewsNote">⚑ Placeholders until your live Google feed is connected (see google-reviews.php). Once live, real reviews replace these automatically.</p>
   </div>
 </section>
 
