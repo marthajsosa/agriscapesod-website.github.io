@@ -149,15 +149,184 @@
   .band-dark{ background:var(--blue-deep); color:#eaf4fc; }
   .band-dark h2{ color:#fff; } .band-dark .sec-head p{ color:#bcd6e8; }
 
-  /* ---- Service cards ---- */
-  .grid-4{ display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem; }
-  .svc{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:1.6rem; transition:transform .18s, box-shadow .18s; display:flex; flex-direction:column; }
-  .svc:hover{ transform:translateY(-4px); box-shadow:var(--shadow); }
-  .svc .ic{ width:48px; height:48px; border-radius:12px; display:grid; place-items:center; margin-bottom:.9rem; font-size:1.4rem; background:linear-gradient(135deg,var(--blue-bright),var(--green-bright)); color:#fff; }
-  .svc h3{ font-size:1.2rem; color:var(--blue-deep); margin-bottom:.4rem; }
-  .svc p{ color:var(--ink-soft); margin:0 0 1rem; font-size:.95rem; flex:1; }
-  .svc a.more{ font-weight:700; color:var(--green-d); font-size:.92rem; }
-  .svc a.more:hover{ text-decoration:underline; }
+  /* ---- Service paths ---- */
+  #services{
+    background:var(--tint-blue);
+  }
+
+  .service-paths{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.4rem;
+  }
+
+  .service-path{
+    position:relative;
+    display:flex;
+    gap:1.2rem;
+    background:#fff;
+    border:1px solid var(--line);
+    border-top:5px solid var(--green);
+    border-radius:18px;
+    padding:clamp(1.5rem,3vw,2.2rem);
+    box-shadow:var(--shadow);
+  }
+
+  .service-path.featured{
+    border-top-color:var(--blue);
+  }
+
+  .service-path-icon{
+    flex:0 0 58px;
+    width:58px;
+    height:58px;
+    display:grid;
+    place-items:center;
+    border-radius:15px;
+    background:linear-gradient(135deg,var(--blue-bright),var(--green-bright));
+    color:#fff;
+    font-size:1.7rem;
+  }
+
+  .service-path-content{
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+  }
+
+  .service-label{
+    display:inline-block;
+    width:max-content;
+    margin-bottom:.45rem;
+    color:var(--green-d);
+    font-size:.72rem;
+    font-weight:800;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+  }
+
+  .service-path.featured .service-label{
+    color:var(--blue);
+  }
+
+  .service-path h3{
+    color:var(--blue-deep);
+    font-size:clamp(1.45rem,2.6vw,2rem);
+    margin-bottom:.7rem;
+  }
+
+  .service-path p{
+    color:var(--ink-soft);
+    margin:0 0 1rem;
+  }
+
+  .service-points{
+    margin:0 0 1.4rem;
+    padding:0;
+    list-style:none;
+  }
+
+  .service-points li{
+    position:relative;
+    padding:.28rem 0 .28rem 1.45rem;
+    color:var(--ink);
+    font-size:.94rem;
+  }
+
+  .service-points li::before{
+    content:"✓";
+    position:absolute;
+    left:0;
+    color:var(--green-d);
+    font-weight:800;
+  }
+
+  .service-actions{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:.75rem;
+    margin-top:auto;
+  }
+
+  .service-actions .btn{
+    width:100%;
+  }
+
+  .service-text-link{
+    color:var(--green-d);
+    font-size:.88rem;
+    font-weight:700;
+  }
+
+  .service-text-link:hover{
+    text-decoration:underline;
+  }
+
+  /* ---- Customer types ---- */
+  .customer-types{
+    display:grid;
+    grid-template-columns:.7fr 2fr;
+    gap:2rem;
+    align-items:center;
+    margin-top:2rem;
+    padding:1.5rem;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:16px;
+  }
+
+  .customer-types-heading h3{
+    margin-top:.4rem;
+    color:var(--blue-deep);
+    font-size:1.35rem;
+  }
+
+  .customer-type-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1rem;
+  }
+
+  .customer-type{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    align-items:center;
+    gap:.8rem;
+    padding:1rem;
+    background:var(--tint-green);
+    border:1px solid #d6e8c6;
+    border-radius:12px;
+    transition:transform .15s, border-color .15s;
+  }
+
+  .customer-type:hover{
+    transform:translateY(-2px);
+    border-color:var(--green);
+  }
+
+  .customer-type-icon{
+    font-size:1.45rem;
+  }
+
+  .customer-type strong{
+    display:block;
+    color:var(--blue-deep);
+    font-family:var(--display);
+  }
+
+  .customer-type small{
+    display:block;
+    margin-top:.2rem;
+    color:var(--ink-soft);
+    line-height:1.45;
+  }
+
+  .customer-arrow{
+    color:var(--green-d);
+    font-weight:800;
+    font-size:1.2rem;
+  }
 
   /* ---- Calculator ---- */
   .calc{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(1.6rem,4vw,3rem); align-items:center; }
@@ -317,6 +486,9 @@
     .reviews, .arts{ grid-template-columns:1fr 1fr; }
     .stats .wrap{ grid-template-columns:1fr 1fr; }
     .foot-grid{ grid-template-columns:1fr 1fr; }
+    .service-paths{ grid-template-columns:1fr; }
+    .customer-types{ grid-template-columns:1fr; }
+    .customer-type-grid{ grid-template-columns:1fr 1fr; }
   }
 @media (max-width:600px){
 
@@ -414,6 +586,23 @@
   .callback .row2{
     grid-template-columns:1fr;
   }
+
+  .service-path{
+    flex-direction:column;
+  }
+
+  .customer-type-grid{
+    grid-template-columns:1fr;
+  }
+
+  .customer-types{
+    padding:1.1rem;
+  }
+
+  .service-actions .btn{
+    white-space:normal;
+    text-align:center;
+  }
 }
   @media (prefers-reduced-motion:reduce){
     *{ scroll-behavior:auto; } .reveal{ opacity:1; transform:none; transition:none; }
@@ -500,17 +689,117 @@
 <!-- ===== Services ===== -->
 <section id="services">
   <div class="wrap">
+
     <div class="sec-head center reveal">
-      <span class="eyebrow" style="justify-content:center;">What we do</span>
-      <h2>Sod, from our fields to your project.</h2>
-      <p>Choose what you need — each has its own page with details, pricing guidance, and coverage.</p>
+      <span class="eyebrow" style="justify-content:center;">How can we help?</span>
+      <h2>Choose delivery or full-service installation.</h2>
+      <p>
+        Order fresh-cut sod for your own project or let AgriScape handle the
+        removal, preparation, delivery, and installation.
+      </p>
     </div>
-    <div class="grid-4">
-      <div class="svc reveal"><div class="ic">🚚</div><h3>Delivery</h3><p>Fresh-cut sod harvested within 24 hours and delivered free across our service area — by the pallet or by the truckload.</p><a class="more" href="#">Sod delivery →</a></div>
-      <div class="svc reveal"><div class="ic">🌱</div><h3>Installation</h3><p>Full-service install: old turf removal, ground prep, and professional laying for a lawn that roots and lasts.</p><a class="more" href="#">Sod installation →</a></div>
-      <div class="svc reveal"><div class="ic">🏡</div><h3>Residential</h3><p>New lawns and replacements for homeowners across Sarasota–Bradenton–Venice and Fort Myers–Cape Coral.</p><a class="more" href="#">Residential sod →</a></div>
-      <div class="svc reveal"><div class="ic">🏗️</div><h3>Commercial</h3><p>HOAs, developers, contractors, and government projects — at the scale and reliability large jobs demand.</p><a class="more" href="#">Commercial &amp; government →</a></div>
+
+    <div class="service-paths">
+
+      <article class="service-path reveal">
+        <div class="service-path-icon" aria-hidden="true">🚚</div>
+
+        <div class="service-path-content">
+          <span class="service-label">Sod delivery</span>
+          <h3>Need fresh sod delivered?</h3>
+
+          <p>
+            Order Florida-grown sod by the pallet or truckload for your own
+            crew, contractor, or do-it-yourself installation.
+          </p>
+
+          <ul class="service-points">
+            <li>Harvested within 24 hours</li>
+            <li>Free local delivery</li>
+            <li>Multiple Florida grass varieties</li>
+            <li>Residential and commercial quantities</li>
+          </ul>
+
+          <div class="service-actions">
+            <button class="btn btn-primary" type="button" onclick="openWizard()">
+              Get delivery pricing
+            </button>
+
+            <a class="service-text-link" href="#estimate">
+              Calculate how much sod you need →
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-path featured reveal">
+        <div class="service-path-icon" aria-hidden="true">🌱</div>
+
+        <div class="service-path-content">
+          <span class="service-label">Full-service installation</span>
+          <h3>Want us to handle the whole project?</h3>
+
+          <p>
+            We remove the old lawn, prepare the ground, deliver fresh sod,
+            install it properly, and clean up when the job is done.
+          </p>
+
+          <ul class="service-points">
+            <li>Existing turf removal</li>
+            <li>Ground preparation and grading</li>
+            <li>Fresh sod delivery</li>
+            <li>Professional installation and cleanup</li>
+          </ul>
+
+          <div class="service-actions">
+            <button class="btn btn-blue" type="button" onclick="openWizard()">
+              Request an installation quote
+            </button>
+
+            <a class="service-text-link" href="#estimate">
+              Get an installation estimate →
+            </a>
+          </div>
+        </div>
+      </article>
+
     </div>
+
+    <div class="customer-types reveal">
+      <div class="customer-types-heading">
+        <span class="eyebrow">Who we work with</span>
+        <h3>Projects of every size</h3>
+      </div>
+
+      <div class="customer-type-grid">
+
+        <a class="customer-type" href="#">
+          <span class="customer-type-icon" aria-hidden="true">🏡</span>
+          <span>
+            <strong>Homeowners</strong>
+            <small>
+              New lawns, replacements, sod delivery, and installation across
+              our Southwest Florida residential service area.
+            </small>
+          </span>
+          <span class="customer-arrow" aria-hidden="true">→</span>
+        </a>
+
+        <a class="customer-type" href="#">
+          <span class="customer-type-icon" aria-hidden="true">🏗️</span>
+          <span>
+            <strong>Commercial and government</strong>
+            <small>
+              Sod supply and installation for HOAs, developers, contractors,
+              municipalities, and large-scale projects.
+            </small>
+          </span>
+          <span class="customer-arrow" aria-hidden="true">→</span>
+        </a>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
