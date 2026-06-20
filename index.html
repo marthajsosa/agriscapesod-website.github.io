@@ -464,6 +464,116 @@
   .wz-success .check{ width:64px; height:64px; border-radius:50%; background:var(--green); color:#fff; display:grid; place-items:center; margin:0 auto 1rem; font-size:2rem; font-weight:800; }
   .wz-success h3{ color:var(--blue-deep); }
 
+
+  /* ======== DELIVERY PRICING WIZARD ======== */
+  .delivery-panel{ display:none; }
+  .delivery-panel.show{ display:block; }
+
+  .delivery-grass-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:.7rem;
+  }
+
+  .delivery-choice{
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:1rem;
+    cursor:pointer;
+    text-align:left;
+    font-family:var(--body);
+    font-weight:700;
+    color:var(--blue-deep);
+    background:#fff;
+    transition:border-color .15s, background .15s, box-shadow .15s;
+  }
+
+  .delivery-choice:hover{
+    border-color:var(--green-bright);
+  }
+
+  .delivery-choice.sel{
+    border-color:var(--green);
+    background:var(--tint-green);
+    box-shadow:inset 0 0 0 1px var(--green);
+  }
+
+  .delivery-choice small{
+    display:block;
+    margin-top:.25rem;
+    color:var(--ink-soft);
+    font-weight:500;
+    line-height:1.4;
+  }
+
+  .quantity-toggle{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:.6rem;
+    margin-bottom:1rem;
+  }
+
+  .quantity-choice{
+    padding:.75rem;
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    background:#fff;
+    color:var(--blue-deep);
+    font-family:var(--body);
+    font-weight:700;
+    cursor:pointer;
+  }
+
+  .quantity-choice.active{
+    border-color:var(--green);
+    background:var(--tint-green);
+    color:var(--green-d);
+  }
+
+  .delivery-fields{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:.7rem;
+  }
+
+  .delivery-result,
+  .delivery-summary{
+    margin-top:1rem;
+    padding:1rem;
+    border-radius:12px;
+    background:var(--tint-green);
+    border:1px solid #d6e8c6;
+  }
+
+  .delivery-result{
+    color:var(--green-d);
+    font-weight:700;
+    text-align:center;
+  }
+
+  .delivery-note{
+    margin:.65rem 0 0;
+    color:var(--ink-soft);
+    font-size:.82rem;
+    text-align:center;
+  }
+
+  .delivery-error{
+    min-height:1.2em;
+    margin-top:.65rem;
+    color:#a3452f;
+    font-size:.88rem;
+    font-weight:600;
+  }
+
+  @media (max-width:600px){
+    .delivery-grass-grid,
+    .quantity-toggle,
+    .delivery-fields{
+      grid-template-columns:1fr;
+    }
+  }
+
   /* ======== COOKIE BANNER ======== */
   .cookie{ position:fixed; bottom:0; left:0; right:0; z-index:150; background:#fff; border-top:1px solid var(--line); box-shadow:0 -10px 30px -20px rgba(0,0,0,.4); padding:1rem var(--pad); display:none; }
   .cookie.show{ display:block; }
@@ -740,7 +850,7 @@
             <button
               class="btn btn-primary"
               type="button"
-              onclick="openWizard('delivery')"
+              onclick="openDeliveryWizard()"
             >
               Get delivery pricing
             </button>
@@ -1065,6 +1175,161 @@
   </div>
 </div>
 
+
+<!-- ===== DELIVERY PRICING MODAL ===== -->
+<div class="wz-overlay" id="deliveryOverlay" role="dialog" aria-modal="true" aria-labelledby="deliveryTitle">
+  <div class="wz">
+    <div class="wz-head">
+      <div>
+        <div class="t" id="deliveryTitle">Get sod delivery pricing</div>
+        <div class="s">Choose your grass, estimate pallets, and tell us where to deliver</div>
+      </div>
+      <button class="wz-close" type="button" onclick="closeDeliveryWizard()" aria-label="Close">×</button>
+    </div>
+
+    <div class="wz-steps" id="deliverySteps">
+      <div class="wz-step active" data-delivery-step="0"><div class="dot">1</div><div class="lab">Grass</div></div>
+      <div class="wz-step" data-delivery-step="1"><div class="dot">2</div><div class="lab">Quantity</div></div>
+      <div class="wz-step" data-delivery-step="2"><div class="dot">3</div><div class="lab">Delivery</div></div>
+      <div class="wz-step" data-delivery-step="3"><div class="dot">4</div><div class="lab">Contact</div></div>
+    </div>
+
+    <div class="wz-body" id="deliveryBody">
+
+      <div class="delivery-panel show" data-delivery-panel="0">
+        <h3>What type of grass do you need?</h3>
+        <div class="delivery-grass-grid">
+          <button class="delivery-choice" type="button" data-grass="Floratam St. Augustine">
+            Floratam St. Augustine
+            <small>A common Florida lawn grass for sunny yards.</small>
+          </button>
+
+          <button class="delivery-choice" type="button" data-grass="Bitterblue St. Augustine">
+            Bitterblue St. Augustine
+            <small>A darker St. Augustine variety with some shade tolerance.</small>
+          </button>
+
+          <button class="delivery-choice" type="button" data-grass="ProVista St. Augustine">
+            ProVista St. Augustine
+            <small>A slow-growing St. Augustine variety.</small>
+          </button>
+
+          <button class="delivery-choice" type="button" data-grass="Palmetto St. Augustine">
+            Palmetto St. Augustine
+            <small>A soft-textured St. Augustine variety.</small>
+          </button>
+
+          <button class="delivery-choice" type="button" data-grass="Empire Zoysia">
+            Empire Zoysia
+            <small>A dense turf with a fine-to-medium texture.</small>
+          </button>
+
+          <button class="delivery-choice" type="button" data-grass="Argentine Bahia">
+            Argentine Bahia
+            <small>A durable option for large sunny areas.</small>
+          </button>
+
+          <button class="delivery-choice" type="button" data-grass="Not sure">
+            I’m not sure
+            <small>We’ll help you choose based on sun, shade, irrigation, and use.</small>
+          </button>
+        </div>
+        <div class="delivery-error" id="deliveryGrassError"></div>
+      </div>
+
+      <div class="delivery-panel" data-delivery-panel="1">
+        <h3>How much sod do you need?</h3>
+
+        <div class="quantity-toggle">
+          <button class="quantity-choice active" type="button" data-mode="area">
+            Enter lawn dimensions
+          </button>
+          <button class="quantity-choice" type="button" data-mode="pallets">
+            I know the pallet count
+          </button>
+        </div>
+
+        <div id="deliveryAreaFields">
+          <div class="delivery-fields">
+            <div>
+              <label for="deliveryLength">Length in feet</label>
+              <input id="deliveryLength" type="number" min="1" inputmode="decimal" placeholder="20" />
+            </div>
+            <div>
+              <label for="deliveryWidth">Width in feet</label>
+              <input id="deliveryWidth" type="number" min="1" inputmode="decimal" placeholder="20" />
+            </div>
+          </div>
+        </div>
+
+        <div id="deliveryPalletFields" hidden>
+          <label for="deliveryPallets">Number of pallets</label>
+          <input id="deliveryPallets" type="number" min="1" step="1" inputmode="numeric" placeholder="2" />
+        </div>
+
+        <div class="delivery-result" id="deliveryResult">
+          Enter your dimensions to calculate the number of pallets.
+        </div>
+
+        <p class="delivery-note">
+          One pallet covers approximately 400 square feet, or a 20 × 20-foot area.
+        </p>
+
+        <div class="delivery-error" id="deliveryQuantityError"></div>
+      </div>
+
+      <div class="delivery-panel" data-delivery-panel="2">
+        <h3>Where should we deliver it?</h3>
+
+        <label for="deliveryZip">Delivery ZIP code</label>
+        <input id="deliveryZip" type="text" inputmode="numeric" maxlength="5" placeholder="e.g. 34205" />
+
+        <div class="zipmsg" id="deliveryZipMsg"></div>
+        <div class="delivery-error" id="deliveryZipError"></div>
+      </div>
+
+      <div class="delivery-panel" data-delivery-panel="3">
+        <h3>Where should we send your pricing?</h3>
+
+        <div class="delivery-fields">
+          <div>
+            <label for="deliveryName">Name</label>
+            <input id="deliveryName" type="text" autocomplete="name" />
+          </div>
+          <div>
+            <label for="deliveryPhone">Phone</label>
+            <input id="deliveryPhone" type="tel" autocomplete="tel" />
+          </div>
+        </div>
+
+        <label for="deliveryEmail" style="margin-top:.8rem;">Email</label>
+        <input id="deliveryEmail" type="email" autocomplete="email" />
+
+        <div class="delivery-summary" id="deliverySummary"></div>
+        <div class="delivery-error" id="deliveryContactError"></div>
+      </div>
+
+    </div>
+
+    <div class="wz-foot" id="deliveryFoot">
+      <a class="callrep" href="tel:+18332474763">📞 Tap to speak with us</a>
+      <div>
+        <button class="btn btn-mini-ghost" id="deliveryBack" type="button" onclick="deliveryPrev()" style="display:none;">Back</button>
+        <button class="btn btn-primary" id="deliveryNext" type="button" onclick="deliveryNext()">Continue</button>
+      </div>
+    </div>
+
+    <div class="wz-success" id="deliverySuccess" style="display:none;">
+      <div class="check">✓</div>
+      <h3>Your delivery request was received.</h3>
+      <p style="color:var(--ink-soft);">
+        We’ll confirm grass availability, delivery timing, and exact pricing with you.
+      </p>
+      <button class="btn btn-mini-ghost" type="button" onclick="closeDeliveryWizard()" style="margin-top:.6rem;">Close</button>
+    </div>
+  </div>
+</div>
+
 <!-- ===== COOKIE CONSENT ===== -->
 <div class="cookie" id="cookie">
   <div class="wrap">
@@ -1125,14 +1390,34 @@
   const overlay=document.getElementById('wzOverlay');
   let wzStep=0; const WZ_MAX=2;
   const state={service:'', zip:''};
-  function openWizard(){ overlay.classList.add('open'); document.body.style.overflow='hidden'; }
+  function openWizard(type=''){
+    document.getElementById('wzBody').style.display='';
+    document.getElementById('wzSteps').style.display='';
+    document.getElementById('wzFoot').style.display='';
+    document.getElementById('wzSuccess').style.display='none';
+
+    if(type==='installation'){
+      state.service='Sod installation';
+      document.querySelectorAll('#wzOverlay .opt').forEach(x => {
+        x.classList.toggle('sel', x.dataset.service==='Sod installation');
+      });
+      showStep(1);
+    } else {
+      state.service='';
+      document.querySelectorAll('#wzOverlay .opt').forEach(x => x.classList.remove('sel'));
+      showStep(0);
+    }
+
+    overlay.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
   function closeWizard(){ overlay.classList.remove('open'); document.body.style.overflow=''; }
   overlay.addEventListener('click', e => { if(e.target===overlay) closeWizard(); });
   document.addEventListener('keydown', e => { if(e.key==='Escape' && overlay.classList.contains('open')) closeWizard(); });
 
   // service selection
-  document.querySelectorAll('.opt').forEach(o => o.addEventListener('click', () => {
-    document.querySelectorAll('.opt').forEach(x => x.classList.remove('sel'));
+  document.querySelectorAll('#wzOverlay .opt').forEach(o => o.addEventListener('click', () => {
+    document.querySelectorAll('#wzOverlay .opt').forEach(x => x.classList.remove('sel'));
     o.classList.add('sel'); state.service=o.dataset.service;
   }));
 
@@ -1186,6 +1471,314 @@
     document.getElementById('wzSuccess').style.display='block';
   }
   showStep(0);
+
+
+  // ---- DELIVERY PRICING WIZARD ----
+  const deliveryOverlay=document.getElementById('deliveryOverlay');
+  let deliveryStep=0;
+  const DELIVERY_MAX=3;
+  const deliveryState={
+    grass:'',
+    mode:'area',
+    length:0,
+    width:0,
+    squareFeet:0,
+    pallets:0,
+    zip:''
+  };
+
+  function openDeliveryWizard(){
+    resetDeliveryWizard();
+    deliveryOverlay.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+
+  function closeDeliveryWizard(){
+    deliveryOverlay.classList.remove('open');
+    document.body.style.overflow='';
+  }
+
+  deliveryOverlay.addEventListener('click', e => {
+    if(e.target===deliveryOverlay) closeDeliveryWizard();
+  });
+
+  document.addEventListener('keydown', e => {
+    if(e.key==='Escape' && deliveryOverlay.classList.contains('open')){
+      closeDeliveryWizard();
+    }
+  });
+
+  function resetDeliveryWizard(){
+    deliveryStep=0;
+    Object.assign(deliveryState,{
+      grass:'',
+      mode:'area',
+      length:0,
+      width:0,
+      squareFeet:0,
+      pallets:0,
+      zip:''
+    });
+
+    document.querySelectorAll('.delivery-choice').forEach(button => {
+      button.classList.remove('sel');
+    });
+
+    document.querySelectorAll('.quantity-choice').forEach(button => {
+      button.classList.toggle('active', button.dataset.mode==='area');
+    });
+
+    document.getElementById('deliveryAreaFields').hidden=false;
+    document.getElementById('deliveryPalletFields').hidden=true;
+
+    [
+      'deliveryLength',
+      'deliveryWidth',
+      'deliveryPallets',
+      'deliveryZip',
+      'deliveryName',
+      'deliveryPhone',
+      'deliveryEmail'
+    ].forEach(id => {
+      document.getElementById(id).value='';
+    });
+
+    document.getElementById('deliveryGrassError').textContent='';
+    document.getElementById('deliveryQuantityError').textContent='';
+    document.getElementById('deliveryZipError').textContent='';
+    document.getElementById('deliveryContactError').textContent='';
+    document.getElementById('deliveryZipMsg').textContent='';
+    document.getElementById('deliveryResult').textContent=
+      'Enter your dimensions to calculate the number of pallets.';
+
+    document.getElementById('deliveryBody').style.display='';
+    document.getElementById('deliverySteps').style.display='';
+    document.getElementById('deliveryFoot').style.display='';
+    document.getElementById('deliverySuccess').style.display='none';
+
+    showDeliveryStep(0);
+  }
+
+  document.querySelectorAll('.delivery-choice').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('.delivery-choice').forEach(item => {
+        item.classList.remove('sel');
+      });
+      button.classList.add('sel');
+      deliveryState.grass=button.dataset.grass;
+      document.getElementById('deliveryGrassError').textContent='';
+    });
+  });
+
+  document.querySelectorAll('.quantity-choice').forEach(button => {
+    button.addEventListener('click', () => {
+      document.querySelectorAll('.quantity-choice').forEach(item => {
+        item.classList.remove('active');
+      });
+      button.classList.add('active');
+      deliveryState.mode=button.dataset.mode;
+
+      document.getElementById('deliveryAreaFields').hidden=
+        deliveryState.mode!=='area';
+      document.getElementById('deliveryPalletFields').hidden=
+        deliveryState.mode!=='pallets';
+
+      document.getElementById('deliveryQuantityError').textContent='';
+      calculateDeliveryQuantity();
+    });
+  });
+
+  function calculateDeliveryQuantity(){
+    const result=document.getElementById('deliveryResult');
+
+    if(deliveryState.mode==='area'){
+      const length=Number(document.getElementById('deliveryLength').value);
+      const width=Number(document.getElementById('deliveryWidth').value);
+
+      if(length<=0 || width<=0){
+        deliveryState.length=0;
+        deliveryState.width=0;
+        deliveryState.squareFeet=0;
+        deliveryState.pallets=0;
+        result.textContent='Enter your dimensions to calculate the number of pallets.';
+        return;
+      }
+
+      const squareFeet=length*width;
+      const pallets=Math.ceil(squareFeet/400);
+
+      deliveryState.length=length;
+      deliveryState.width=width;
+      deliveryState.squareFeet=squareFeet;
+      deliveryState.pallets=pallets;
+
+      result.textContent=
+        `${squareFeet.toLocaleString()} sq. ft. requires approximately ` +
+        `${pallets} ${pallets===1?'pallet':'pallets'}.`;
+    } else {
+      const pallets=Math.ceil(Number(document.getElementById('deliveryPallets').value));
+
+      if(pallets<=0){
+        deliveryState.squareFeet=0;
+        deliveryState.pallets=0;
+        result.textContent='Enter the number of pallets you need.';
+        return;
+      }
+
+      deliveryState.pallets=pallets;
+      deliveryState.squareFeet=pallets*400;
+
+      result.textContent=
+        `${pallets} ${pallets===1?'pallet covers':'pallets cover'} approximately ` +
+        `${deliveryState.squareFeet.toLocaleString()} sq. ft.`;
+    }
+  }
+
+  ['deliveryLength','deliveryWidth','deliveryPallets'].forEach(id => {
+    document.getElementById(id).addEventListener('input', () => {
+      document.getElementById('deliveryQuantityError').textContent='';
+      calculateDeliveryQuantity();
+    });
+  });
+
+  document.getElementById('deliveryZip').addEventListener('input', function(){
+    const z=this.value.trim();
+    const msg=document.getElementById('deliveryZipMsg');
+    document.getElementById('deliveryZipError').textContent='';
+
+    if(!/^\d{5}$/.test(z)){
+      msg.textContent='';
+      return;
+    }
+
+    const p=z.slice(0,3);
+    const local=['342','341','339','340'];
+
+    if(local.includes(p)){
+      msg.className='zipmsg ok';
+      msg.textContent='✓ Great — this appears to be in our local delivery area.';
+    } else {
+      msg.className='zipmsg warn';
+      msg.textContent='We may still be able to deliver here — continue and we’ll confirm.';
+    }
+  });
+
+  function showDeliveryStep(step){
+    deliveryStep=step;
+
+    document.querySelectorAll('.delivery-panel').forEach(panel => {
+      panel.classList.toggle(
+        'show',
+        Number(panel.dataset.deliveryPanel)===step
+      );
+    });
+
+    document.querySelectorAll('[data-delivery-step]').forEach(marker => {
+      const markerStep=Number(marker.dataset.deliveryStep);
+      marker.classList.toggle('active', markerStep===step);
+      marker.classList.toggle('done', markerStep<step);
+    });
+
+    document.getElementById('deliveryBack').style.display=
+      step>0?'inline-flex':'none';
+
+    document.getElementById('deliveryNext').textContent=
+      step===DELIVERY_MAX?'Request pricing':'Continue';
+
+    if(step===DELIVERY_MAX){
+      updateDeliverySummary();
+    }
+  }
+
+  function deliveryPrev(){
+    if(deliveryStep>0) showDeliveryStep(deliveryStep-1);
+  }
+
+  function deliveryNext(){
+    if(deliveryStep===0){
+      if(!deliveryState.grass){
+        document.getElementById('deliveryGrassError').textContent=
+          'Please choose a grass type or select “I’m not sure.”';
+        return;
+      }
+    }
+
+    if(deliveryStep===1){
+      calculateDeliveryQuantity();
+      if(deliveryState.pallets<1){
+        document.getElementById('deliveryQuantityError').textContent=
+          'Please enter the lawn dimensions or number of pallets.';
+        return;
+      }
+    }
+
+    if(deliveryStep===2){
+      const zip=document.getElementById('deliveryZip').value.trim();
+      if(!/^\d{5}$/.test(zip)){
+        document.getElementById('deliveryZipError').textContent=
+          'Please enter a valid 5-digit ZIP code.';
+        return;
+      }
+      deliveryState.zip=zip;
+    }
+
+    if(deliveryStep===DELIVERY_MAX){
+      submitDeliveryRequest();
+      return;
+    }
+
+    showDeliveryStep(deliveryStep+1);
+  }
+
+  function updateDeliverySummary(){
+    const quantity=deliveryState.mode==='area'
+      ? `${deliveryState.squareFeet.toLocaleString()} sq. ft., approximately ${deliveryState.pallets} ${deliveryState.pallets===1?'pallet':'pallets'}`
+      : `${deliveryState.pallets} ${deliveryState.pallets===1?'pallet':'pallets'}, approximately ${deliveryState.squareFeet.toLocaleString()} sq. ft.`;
+
+    document.getElementById('deliverySummary').innerHTML=
+      `<strong>Delivery request</strong><br>` +
+      `Grass: ${deliveryState.grass}<br>` +
+      `Quantity: ${quantity}<br>` +
+      `Delivery ZIP: ${deliveryState.zip}`;
+  }
+
+  function submitDeliveryRequest(){
+    const name=document.getElementById('deliveryName').value.trim();
+    const phone=document.getElementById('deliveryPhone').value.trim();
+    const email=document.getElementById('deliveryEmail').value.trim();
+    const error=document.getElementById('deliveryContactError');
+
+    if(!name || !phone){
+      error.textContent='Please enter your name and phone number.';
+      return;
+    }
+
+    if(email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      error.textContent='Please enter a valid email address or leave it blank.';
+      return;
+    }
+
+    const request={
+      ...deliveryState,
+      name,
+      phone,
+      email
+    };
+
+    console.log('Delivery pricing request:', request);
+
+    /*
+      PRODUCTION:
+      Replace the console.log above with your form handler, CRM endpoint,
+      server-side PHP form, or email service. This front-end version collects
+      and validates the request but does not send it anywhere yet.
+    */
+
+    document.getElementById('deliveryBody').style.display='none';
+    document.getElementById('deliverySteps').style.display='none';
+    document.getElementById('deliveryFoot').style.display='none';
+    document.getElementById('deliverySuccess').style.display='block';
+  }
 
   // ---- ACTION WIDGET ----
   const fabPanel=document.getElementById('fabPanel');
