@@ -1518,6 +1518,42 @@
   }
 
 
+  /* Mobile map modal: larger tap targets and safer sticky actions */
+  @media(max-width:720px){
+    .map-modal .map-result-actions{
+      display:grid;
+      gap:.85rem;
+      padding:.85rem 0 max(.85rem, env(safe-area-inset-bottom));
+      pointer-events:auto;
+    }
+
+    .map-modal .map-result-actions .btn{
+      min-height:52px;
+      padding:1em 1.1em;
+      font-size:1rem;
+      line-height:1.15;
+      border-radius:999px;
+      touch-action:manipulation;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    .map-modal .map-result-actions .btn:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+      pointer-events:none;
+    }
+
+    .map-modal .map-card,
+    .map-modal #sodMap{
+      touch-action:auto;
+    }
+
+    .map-modal .leaflet-container{
+      touch-action:pan-x pan-y;
+    }
+  }
+
+
 </style>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -2656,6 +2692,24 @@
   });
 
 
+
+  function scrollMapBackToDrawingArea(){
+    if(window.innerWidth > 720) return;
+
+    const mapCard=document.querySelector('.map-modal .map-card');
+    if(!mapCard) return;
+
+    setTimeout(() => {
+      mapCard.scrollIntoView({behavior:'smooth', block:'start'});
+
+      setTimeout(() => {
+        if(typeof sodMap!=='undefined' && sodMap){
+          sodMap.invalidateSize();
+        }
+      },250);
+    },100);
+  }
+
   function scrollMapResultsIntoViewOnMobile(){
     if(window.innerWidth > 720) return;
     if(!mapMeasuredSqFt || mapMeasuredSqFt < 1) return;
@@ -2860,6 +2914,11 @@
     if(mapMeasuredSqFt<1) return;
     closeMapCalculator();
     openInstallationWizard(Math.round(mapMeasuredSqFt));
+  });
+
+
+  document.getElementById('clearMapShapes')?.addEventListener('click',() => {
+    scrollMapBackToDrawingArea();
   });
 
   document.getElementById('useMapEstimate')?.addEventListener('click',() => {
