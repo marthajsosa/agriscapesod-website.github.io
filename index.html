@@ -1469,6 +1469,55 @@
     }
   }
 
+  /* Mobile map modal: show the next steps after outlining */
+  @media(max-width:720px){
+    .map-modal .map-calc-layout{
+      grid-template-columns:1fr;
+      gap:.75rem;
+    }
+
+    .map-modal #sodMap{
+      height:42vh;
+      min-height:300px;
+    }
+
+    .map-modal .map-results{
+      position:static;
+      padding:1rem;
+      border-top:5px solid var(--green);
+    }
+
+    .map-modal .map-results h3{
+      font-size:1.2rem;
+      margin-bottom:.45rem;
+    }
+
+    .map-modal .map-instructions{
+      font-size:.82rem;
+      margin-bottom:.65rem;
+    }
+
+    .map-modal .map-metric{
+      padding:.48rem 0;
+    }
+
+    .map-modal .map-result-actions{
+      position:sticky;
+      bottom:0;
+      z-index:10;
+      background:#fff;
+      padding:.75rem 0 0;
+      margin-top:.8rem;
+      box-shadow:0 -12px 24px -24px rgba(0,0,0,.55);
+    }
+
+    .map-modal .map-result-actions .btn{
+      padding:.78em 1em;
+      font-size:.92rem;
+    }
+  }
+
+
 </style>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -1653,7 +1702,7 @@
           <button class="btn btn-blue" id="mapSearchBtn" type="button">Find property</button>
         </div>
         <div id="sodMap" aria-label="Interactive aerial map for outlining lawn areas"></div>
-        <div class="map-status" id="mapStatus">Search for an address, then use the polygon tool to outline the grass.</div>
+        <div class="map-status" id="mapStatus">Search for an address, then use the polygon tool to outline the grass. After outlining, scroll below the map to continue.</div>
       </div>
 
       <aside class="map-results reveal">
@@ -2606,6 +2655,19 @@
     }
   });
 
+
+  function scrollMapResultsIntoViewOnMobile(){
+    if(window.innerWidth > 720) return;
+    if(!mapMeasuredSqFt || mapMeasuredSqFt < 1) return;
+
+    const results=document.querySelector('.map-modal .map-results');
+    if(!results) return;
+
+    setTimeout(() => {
+      results.scrollIntoView({behavior:'smooth', block:'start'});
+    },250);
+  }
+
   // ---- MAP SOD CALCULATOR ----
   const mapEl=document.getElementById('sodMap');
   let sodMap=null;
@@ -2659,6 +2721,8 @@
 
     document.getElementById('useMapEstimate').disabled=mapPalletCount<1;
     document.getElementById('useMapInstallationEstimate').disabled=mapMeasuredSqFt<1;
+
+    scrollMapResultsIntoViewOnMobile();
   }
 
   function initializeSodMap(){
