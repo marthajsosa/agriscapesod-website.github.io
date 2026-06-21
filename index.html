@@ -1554,6 +1554,57 @@
   }
 
 
+  /* Mobile service buttons: bigger tap targets and no overlay interference */
+  .service-path{
+    isolation:isolate;
+  }
+
+  .service-path-content,
+  .service-actions{
+    position:relative;
+    z-index:3;
+  }
+
+  .service-circle-photo{
+    z-index:1;
+    pointer-events:none;
+  }
+
+  .service-route-btn,
+  .service-text-link{
+    position:relative;
+    z-index:5;
+    pointer-events:auto;
+    touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  @media(max-width:720px){
+    .service-actions{
+      gap:.95rem;
+      width:100%;
+    }
+
+    .service-actions .btn,
+    .service-route-btn{
+      min-height:58px;
+      width:100%;
+      padding:1.05em 1.2em;
+      font-size:1rem;
+      line-height:1.15;
+      border-radius:999px;
+    }
+
+    .service-text-link{
+      display:inline-flex;
+      align-items:center;
+      min-height:44px;
+      padding:.25rem 0;
+      font-size:1rem;
+    }
+  }
+
+
 </style>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -1662,7 +1713,7 @@
             <li>Local delivery available</li>
           </ul>
           <div class="service-actions">
-            <button class="btn btn-primary" onclick="openWizard('delivery')">Get delivery pricing</button>
+            <button class="btn btn-primary service-route-btn" type="button" onclick="routeServiceButton(event,'delivery')">Get delivery pricing</button>
             <a class="service-text-link" href="#measure-lawn" onclick="openMapCalculator(); return false;">Measure your lawn on the map →</a>
           </div>
         </div>
@@ -1682,7 +1733,7 @@
             <li>Fresh sod installation and cleanup</li>
           </ul>
           <div class="service-actions">
-            <button class="btn btn-blue" onclick="openWizard('installation')">Estimate installation</button>
+            <button class="btn btn-blue service-route-btn" type="button" onclick="routeServiceButton(event,'installation')">Estimate installation</button>
             <a class="service-text-link" href="#measure-lawn" onclick="openMapCalculator(); return false;">Measure your lawn on the map →</a>
           </div>
         </div>
@@ -1743,7 +1794,7 @@
 
       <aside class="map-results reveal">
         <span class="eyebrow">HOW IT WORKS</span>
-        <h3>Your yard, figured out in seconds.</h3>
+        <h3>MYour yard, figured out in seconds.</h3>
         <ol class="map-instructions">
           <li>Enter your address to zoom in.</li>
           <li>Use the polygon tool to outline your yard</li>
@@ -2431,6 +2482,23 @@
   let savedProjectZip='';
   const residentialZipPrefixes=['342','341','339','340'];
 
+
+  let serviceButtonLocked=false;
+
+  function routeServiceButton(event,type){
+    event?.preventDefault();
+    event?.stopPropagation();
+
+    if(serviceButtonLocked) return;
+    serviceButtonLocked=true;
+
+    openWizard(type);
+
+    setTimeout(() => {
+      serviceButtonLocked=false;
+    },500);
+  }
+
   function openWizard(type=''){
     state.service='';
     state.zip=savedProjectZip;
@@ -2652,6 +2720,15 @@
   }
 
   showStep(0);
+
+
+
+  document.querySelectorAll('.service-route-btn').forEach(button => {
+    const type = button.getAttribute('onclick')?.includes('installation') ? 'installation' : 'delivery';
+
+    button.addEventListener('touchend',event => routeServiceButton(event,type),{passive:false});
+    button.addEventListener('pointerup',event => routeServiceButton(event,type));
+  });
 
 
   // ---- MAP CALCULATOR MODAL ----
