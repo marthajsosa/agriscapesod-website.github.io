@@ -1458,18 +1458,7 @@
       line-height:1.2;
     }
   }
-
-  @media(max-width:390px){
-    .trust-stat span{
-      display:none;
-    }
-
-    .trust-stats{
-      padding-block:.8rem;
-    }
-  }
-
-  /* Mobile map modal: show the next steps after outlining */
+/* Mobile map modal: show the next steps after outlining */
   @media(max-width:720px){
     .map-modal .map-calc-layout{
       grid-template-columns:1fr;
@@ -1601,6 +1590,86 @@
       min-height:44px;
       padding:.25rem 0;
       font-size:1rem;
+    }
+  }
+
+
+  /* Mobile/tablet trust ribbon: keep captions visible */
+  @media(max-width:900px){
+    .trust-ribbon .wrap{
+      max-width:none;
+      width:100%;
+      padding-inline:12px;
+    }
+
+    .trust-stats{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:0;
+      width:100%;
+      text-align:center;
+      padding-block:.85rem .8rem;
+    }
+
+    .trust-stat{
+      min-width:0;
+      padding:0 .45rem;
+      border-left:1px solid rgba(255,255,255,.22);
+    }
+
+    .trust-stat:first-child{
+      border-left:0;
+    }
+
+    .trust-stat:nth-child(3),
+    .trust-stat:nth-child(5){
+      display:none;
+    }
+
+    .trust-stat:nth-child(4){
+      display:block;
+      border-left:1px solid rgba(255,255,255,.22);
+      padding-left:.45rem;
+    }
+
+    .trust-stat strong{
+      display:block;
+      white-space:normal;
+      font-size:clamp(.95rem,3.8vw,1.18rem);
+      line-height:1.05;
+    }
+
+    .trust-stat span{
+      display:block !important;
+      margin:.25rem auto 0;
+      max-width:14ch;
+      font-size:clamp(.56rem,2.35vw,.72rem);
+      line-height:1.15;
+    }
+  }
+
+  @media(max-width:430px){
+    .trust-ribbon .wrap{
+      padding-inline:8px;
+    }
+
+    .trust-stats{
+      padding-block:.72rem .68rem;
+    }
+
+    .trust-stat{
+      padding:0 .35rem;
+    }
+
+    .trust-stat strong{
+      font-size:clamp(.9rem,4.6vw,1.08rem);
+    }
+
+    .trust-stat span{
+      display:block !important;
+      max-width:13ch;
+      font-size:clamp(.53rem,2.45vw,.66rem);
+      line-height:1.12;
     }
   }
 
