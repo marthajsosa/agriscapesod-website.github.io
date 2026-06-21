@@ -454,6 +454,93 @@
   }
 
 
+
+  /* ---- Map calculator launch + modal ---- */
+  .measure-launch-card{
+    max-width:780px;
+    margin-inline:auto;
+    text-align:center;
+    background:#fff;
+    border:1px solid var(--line);
+    border-top:5px solid var(--green);
+    border-radius:22px;
+    padding:clamp(1.6rem,4vw,2.6rem);
+    box-shadow:var(--shadow);
+  }
+
+  .measure-launch-card h2{
+    color:var(--blue-deep);
+    font-size:clamp(2rem,4vw,3.2rem);
+    margin:.55rem 0 .75rem;
+  }
+
+  .measure-launch-card p{
+    color:var(--ink-soft);
+    max-width:58ch;
+    margin:0 auto 1.4rem;
+    font-size:1.05rem;
+  }
+
+  .map-modal-overlay{
+    position:fixed;
+    inset:0;
+    z-index:5200;
+    display:none;
+    align-items:flex-start;
+    justify-content:center;
+    padding:3vh 16px;
+    background:rgba(10,30,50,.68);
+    overflow-y:auto;
+  }
+
+  .map-modal-overlay.open{
+    display:flex;
+  }
+
+  .map-modal{
+    width:min(1180px,100%);
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 30px 80px -30px rgba(0,0,0,.68);
+  }
+
+  .map-modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:1rem;
+    padding:1rem 1.25rem;
+    background:var(--blue-deep);
+    color:#fff;
+  }
+
+  .map-modal-head h3{
+    margin:0;
+    font-size:1.3rem;
+    color:#fff;
+  }
+
+  .map-modal-head p{
+    margin:.25rem 0 0;
+    color:#cfe5f5;
+    font-size:.92rem;
+  }
+
+  .map-modal-close{
+    border:0;
+    background:none;
+    color:#fff;
+    font-size:1.7rem;
+    line-height:1;
+    cursor:pointer;
+    padding:.15rem .25rem;
+  }
+
+  .map-modal-body{
+    padding:1rem;
+  }
+
   /* ---- Map sod calculator ---- */
   #measure-lawn{
     background:#fff;
@@ -1180,6 +1267,52 @@
     padding:1.1rem;
   }
 
+  .map-modal-overlay{
+    align-items:stretch;
+    padding:0;
+  }
+
+  .map-modal{
+    width:100%;
+    max-width:none;
+    min-height:100vh;
+    border-radius:0;
+  }
+
+  .map-modal-head{
+    position:sticky;
+    top:0;
+    z-index:4;
+  }
+
+  .map-modal-body{
+    padding:.75rem;
+  }
+
+  .map-modal .map-calc-layout{
+    grid-template-columns:1fr;
+    gap:1rem;
+  }
+
+  .map-modal #sodMap{
+    height:58vh;
+    min-height:360px;
+  }
+
+  .map-modal .map-results{
+    position:static;
+    padding:1rem;
+  }
+
+  .map-modal .map-result-actions{
+    position:sticky;
+    bottom:0;
+    z-index:3;
+    background:#fff;
+    padding:.8rem 0 0;
+    box-shadow:0 -12px 24px -24px rgba(0,0,0,.55);
+  }
+
   .service-actions .btn{
     white-space:normal;
     text-align:center;
@@ -1321,7 +1454,7 @@
     </div>
     <nav class="nav-row" id="navRow">
       <a href="#services">Services</a>
-      <a href="#measure-lawn">Measure Your Lawn</a>
+      <a href="#measure-lawn" onclick="openMapCalculator(); return false;">Measure Your Lawn</a>
       <a href="#coverage">Service Area</a>
       <a href="#reviews">Reviews</a>
       <a href="#articles">Resources</a>
@@ -1369,7 +1502,7 @@
       <span class="eyebrow">WE'VE GOT YOU COVERED</span>
       <h2>We&nbsp;drop&nbsp;it&nbsp;off. Or&nbsp;we&nbsp;lay&nbsp;it&nbsp;down. You&nbsp;choose.</h2>
       <p>No matter the size of the project, we make getting fresh-cut sod quick and easy. Use our easy mapping tool to size up your yard once, and see your options instantly.</p>
-      <a class="text-arrow" href="#measure-lawn">Measure your lawn in seconds →</a>
+      <a class="text-arrow" href="#measure-lawn" onclick="openMapCalculator(); return false;">Measure your lawn in seconds →</a>
     </div>
 
     <div class="service-paths service-paths-stacked">
@@ -1388,7 +1521,7 @@
           </ul>
           <div class="service-actions">
             <button class="btn btn-primary" onclick="openDeliveryPricing()">Get delivery pricing</button>
-            <a class="service-text-link" href="#measure-lawn">Measure your lawn on the map →</a>
+            <a class="service-text-link" href="#measure-lawn" onclick="openMapCalculator(); return false;">Measure your lawn on the map →</a>
           </div>
         </div>
       </article>
@@ -1408,7 +1541,7 @@
           </ul>
           <div class="service-actions">
             <button class="btn btn-blue" onclick="openInstallationEstimate()">Estimate installation</button>
-            <a class="service-text-link" href="#measure-lawn">Measure your lawn on the map →</a>
+            <a class="service-text-link" href="#measure-lawn" onclick="openMapCalculator(); return false;">Measure your lawn on the map →</a>
           </div>
         </div>
       </article>
@@ -1430,13 +1563,33 @@
 <!-- ===== Map sod calculator ===== -->
 <section id="measure-lawn" class="band-blue measurement-feature">
   <div class="wrap">
-    <div class="measure-heading reveal">
+    <div class="measure-launch-card reveal">
       <span class="eyebrow">NO SWEAT REQUIRED</span>
       <h2>Put down the measuring wheel.</h2>
-      <p>Just type in your address, trace your lawn on our interactive map, and let us calculate the number of pallets your project needs.</p>
+      <p>
+        Type in the property address, trace the lawn on the map, and use the result
+        for delivery pricing or a rough installation estimate.
+      </p>
+      <button class="btn btn-primary" type="button" onclick="openMapCalculator()">
+        Open map calculator
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Map calculator modal ===== -->
+<div class="map-modal-overlay" id="mapModalOverlay" role="dialog" aria-modal="true" aria-labelledby="mapModalTitle">
+  <div class="map-modal">
+    <div class="map-modal-head">
+      <div>
+        <h3 id="mapModalTitle">Measure your lawn</h3>
+        <p>Outline each grass area, then use the estimate for delivery or installation.</p>
+      </div>
+      <button class="map-modal-close" type="button" onclick="closeMapCalculator()" aria-label="Close map calculator">×</button>
     </div>
 
-    <div class="map-calc-layout">
+    <div class="map-modal-body">
+      <div class="map-calc-layout">
       <div class="map-card reveal">
         <div class="map-search">
           <input id="mapAddress" type="search" placeholder="Enter a property address" autocomplete="street-address" aria-label="Property address" />
@@ -1466,8 +1619,9 @@
         <p class="map-disclaimer">*Installation pricing is a planning range. Final pricing follows a free site review and verified measurement. Map measurements may differ from field measurements.</p>
       </aside>
     </div>
+    </div>
   </div>
-</section>
+</div>
 
 
 
@@ -2280,16 +2434,7 @@
     closeWizard();
 
     setTimeout(() => {
-      document.getElementById('measure-lawn')?.scrollIntoView({
-        behavior:'smooth',
-        block:'start'
-      });
-
-      setTimeout(() => {
-        if(typeof sodMap!=='undefined' && sodMap){
-          sodMap.invalidateSize();
-        }
-      },500);
+      openMapCalculator();
     },100);
   }
 
@@ -2366,6 +2511,43 @@
 
   showStep(0);
 
+
+  // ---- MAP CALCULATOR MODAL ----
+  const mapModalOverlay=document.getElementById('mapModalOverlay');
+
+  function openMapCalculator(){
+    mapModalOverlay.classList.add('open');
+    document.body.style.overflow='hidden';
+
+    setTimeout(() => {
+      if(typeof sodMap!=='undefined' && sodMap){
+        sodMap.invalidateSize();
+      }
+    },250);
+  }
+
+  function closeMapCalculator(){
+    mapModalOverlay.classList.remove('open');
+    document.body.style.overflow='';
+
+    setTimeout(() => {
+      if(typeof sodMap!=='undefined' && sodMap){
+        sodMap.invalidateSize();
+      }
+    },100);
+  }
+
+  mapModalOverlay?.addEventListener('click',event => {
+    if(event.target===mapModalOverlay){
+      closeMapCalculator();
+    }
+  });
+
+  document.addEventListener('keydown',event => {
+    if(event.key==='Escape' && mapModalOverlay?.classList.contains('open')){
+      closeMapCalculator();
+    }
+  });
 
   // ---- MAP SOD CALCULATOR ----
   const mapEl=document.getElementById('sodMap');
@@ -2555,12 +2737,14 @@
 
   document.getElementById('useMapInstallationEstimate')?.addEventListener('click',() => {
     if(mapMeasuredSqFt<1) return;
+    closeMapCalculator();
     openInstallationWizard(Math.round(mapMeasuredSqFt));
   });
 
   document.getElementById('useMapEstimate')?.addEventListener('click',() => {
     if(mapPalletCount<1) return;
 
+    closeMapCalculator();
     openDeliveryWizard();
 
     deliveryState.mode='pallets';
