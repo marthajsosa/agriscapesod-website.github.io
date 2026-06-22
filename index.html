@@ -1386,69 +1386,98 @@
   .map-results{top:112px;border-top:5px solid var(--green);}
   .map-results .eyebrow{margin-bottom:.45rem;}
   .map-results h3{font-size:1.65rem;}
-  .coverage-grid{display:grid;grid-template-columns:minmax(320px,.34fr) minmax(680px,.66fr);gap:clamp(28px,4vw,56px);align-items:center;}
-  .location-panel{margin-top:1.25rem;padding:1.35rem 1.4rem;border-radius:16px;border:1px solid var(--line);background:#fff;box-shadow:0 14px 34px -26px rgba(14,79,134,.5);}
-  .residential-panel{border-left:5px solid var(--green);}.commercial-panel{border-left:5px solid var(--blue);}
-  .location-kicker{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);}
-  .location-panel h3{font-size:1.3rem;color:var(--blue-deep);margin:.35rem 0 .85rem;}
-  .coverage-copy{max-width:470px;}
-  .coverage-copy>p{max-width:44ch;margin-bottom:1.2rem;}
-  .location-panel{margin-top:1rem;padding:1.1rem 1.2rem;}
-  .location-panel h3{font-size:1.16rem;margin:.28rem 0 .65rem;}
-  .chips{gap:.42rem;}
-  .chip{padding:.38rem .72rem;font-size:.84rem;}
- .florida-map-card{
-  padding:1rem;
-  border-radius:28px;
-  background:linear-gradient(145deg,var(--blue-ink),var(--blue-deep));
-  box-shadow:0 28px 64px -28px rgba(14,79,134,.7);
-  transform:scale(1.12);
-  transform-origin:center;
-}
+  .coverage-shell{
+    max-width:1280px;
+  }
 
-.florida-service-map{
-  width:100%;
-  height:auto;
-  display:block;
-  border-radius:18px;
-  background:#eef6fc;
-}
+  .coverage-intro{
+    max-width:900px;
+    margin:0 auto 2rem;
+    text-align:center;
+  }
 
-.map-legend{
-  display:flex;
-  gap:1rem;
-  flex-wrap:wrap;
-  color:#fff;
-  font-size:.85rem;
-  font-weight:700;
-  margin-top:1rem;
-}
+  .coverage-intro h2{
+    font-size:clamp(2.05rem,4vw,3.35rem);
+    color:var(--blue-deep);
+    margin:.65rem auto .9rem;
+    max-width:14ch;
+  }
 
-.map-legend span{
-  display:flex;
-  align-items:center;
-  gap:.45rem;
-}
+  .coverage-intro p{
+    max-width:74ch;
+    margin:0 auto;
+    color:var(--ink-soft);
+    font-size:1.08rem;
+  }
 
-.map-legend i{
-  width:13px;
-  height:13px;
-  border-radius:50%;
-  display:inline-block;
-  border:2px solid #fff;
-}
+  .coverage-map-wrap{
+    max-width:960px;
+    margin:0 auto;
+  }
 
-.legend-residential{
-  background:#d9a441;
-}
+  .coverage-panels{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1rem;
+    max-width:960px;
+    margin:1.25rem auto 0;
+  }
 
-.legend-commercial{
-  background:var(--blue-bright);
-}
+  .location-panel{
+    margin-top:0;
+    padding:1.1rem 1.2rem;
+    border-radius:16px;
+    border:1px solid var(--line);
+    background:#fff;
+    box-shadow:0 14px 34px -26px rgba(14,79,134,.5);
+  }
 
-.legend-keys{
-  background:#b8c0c7;
-}
+  .residential-panel{
+    border-left:5px solid var(--green);
+  }
+
+  .commercial-panel{
+    border-left:5px solid var(--blue);
+  }
+
+  .location-kicker{
+    font-size:.7rem;
+    font-weight:800;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+
+  .location-panel h3{
+    font-size:1.16rem;
+    color:var(--blue-deep);
+    margin:.28rem 0 .65rem;
+  }
+
+  .coverage-panels .chips{
+    gap:.42rem;
+  }
+
+  .coverage-panels .chip{
+    padding:.38rem .72rem;
+    font-size:.84rem;
+  }
+
+  .florida-map-card{
+    padding:.95rem;
+    border-radius:28px;
+    background:linear-gradient(145deg,var(--blue-ink),var(--blue-deep));
+    box-shadow:0 28px 64px -28px rgba(14,79,134,.7);
+  }
+
+  .florida-service-map{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:18px;
+    background:#eef6fc;
+  }
+
   .scale-proof{position:relative;min-height:620px;padding:0;display:grid;align-items:end;overflow:hidden;background:var(--blue-ink);}
   .scale-photo{position:absolute;inset:0;}.scale-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,30,51,.92) 0%,rgba(3,30,51,.68) 48%,rgba(3,30,51,.2) 100%);}.scale-photo img{width:100%;height:100%;object-fit:cover;}
   .scale-copy{position:relative;z-index:2;width:100%;padding-block:clamp(70px,9vw,125px);color:#fff;}
@@ -1460,11 +1489,40 @@
   .installation-fineprint-compact summary{cursor:pointer;font-weight:800;color:#6f4f12;}
 
   @media(max-width:1050px){
-    .hero-grid,.service-overview,.coverage-grid{grid-template-columns:1fr;}
-    .hero-copy{max-width:760px}.hero-copy h1{max-width:12ch}.service-intro{position:static;max-width:760px}.service-paths-stacked{max-width:850px}.coverage-copy{max-width:800px}.florida-map-card{max-width:980px;width:100%;margin:1.5rem auto 0;transform:none;}
+    .hero-grid,.service-overview{grid-template-columns:1fr;}
+    .hero-copy{max-width:760px}.hero-copy h1{max-width:12ch}.service-intro{position:static;max-width:760px}.service-paths-stacked{max-width:850px}
   }
   @media(max-width:720px){
     .hero-grid{padding-block:46px}.hero-photo,.hero-photo img{min-height:320px}.trust-stats{grid-template-columns:1fr 1fr;text-align:left}.trust-stat:nth-child(3){border-left:0;padding-left:0}.service-path-with-photo,.service-path-with-photo.photo-left{padding:125px 1.35rem 1.5rem;}.service-circle-photo,.photo-left .service-circle-photo{width:150px;height:150px;left:50%;right:auto;top:-38px;transform:translateX(-50%);}.scale-proof{min-height:560px}.scale-photo::after{background:linear-gradient(0deg,rgba(3,30,51,.94) 0%,rgba(3,30,51,.58) 62%,rgba(3,30,51,.18) 100%);}
+
+    .coverage-intro{
+      text-align:left;
+      margin-bottom:1.3rem;
+    }
+
+    .coverage-intro h2{
+      max-width:12ch;
+      margin-left:0;
+      margin-right:0;
+    }
+
+    .coverage-intro p{
+      margin-left:0;
+      margin-right:0;
+    }
+
+    .coverage-panels{
+      grid-template-columns:1fr;
+    }
+
+    .florida-map-card{
+      padding:.7rem;
+      border-radius:22px;
+    }
+
+    .florida-service-map{
+      border-radius:15px;
+    }
   }
 
   /* Mobile trust ribbon: keep it short and readable */
@@ -1615,6 +1673,7 @@
   }
 
   .service-route-btn,
+  .project-flow-btn,
   .service-text-link{
     position:relative;
     z-index:5;
@@ -1630,13 +1689,19 @@
     }
 
     .service-actions .btn,
-    .service-route-btn{
+    .service-route-btn,
+    .project-flow-btn{
       min-height:58px;
-      width:100%;
       padding:1.05em 1.2em;
       font-size:1rem;
       line-height:1.15;
       border-radius:999px;
+    }
+
+    .service-actions .project-flow-btn,
+    .mobile-bar .project-flow-btn,
+    footer .project-flow-btn{
+      width:100%;
     }
 
     .service-text-link{
@@ -1765,13 +1830,13 @@
           </span>
         </a>
         <a class="nav-phone" href="tel:+18332474763">📞 833-AGRI-SOD</a>
-        <button class="btn btn-primary" onclick="openWizard()">Schedule now</button>
+        <button class="btn btn-primary project-flow-btn" type="button" onclick="routeProjectFlow(event)">Schedule now</button>
         <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
       </div>
     </div>
     <nav class="nav-row" id="navRow">
       <a href="#services">Services</a>
-      <a href="#measure-lawn" onclick="openMapCalculator(); return false;">Measure Your Lawn</a>
+      <a href="#" onclick="openMapCalculator(); return false;">Measure Your Lawn</a>
       <a href="#coverage">Service Area</a>
       <a href="#reviews">Reviews</a>
       <a href="#articles">Resources</a>
@@ -1789,7 +1854,7 @@
       <p class="sub">We handle the heavy lifting. You just turn on the sprinklers.</p>
          <br>
       <div class="cta-row">
-        <button class="btn btn-primary" onclick="openWizard()">Tell us about your project</button>
+        <button class="btn btn-primary project-flow-btn" type="button" onclick="routeProjectFlow(event)">Tell us about your project</button>
       </div>
       <p class="callline">Prefer to talk? Call or text <a href="tel:+18332474763">833-247-4763</a>.</p>
     </div>
@@ -1819,7 +1884,7 @@
       <span class="eyebrow">WE'VE GOT YOU COVERED</span>
       <h2>We&nbsp;drop&nbsp;it&nbsp;off. Or&nbsp;we&nbsp;lay&nbsp;it&nbsp;down. You&nbsp;choose.</h2>
       <p>No matter the size of the project, we make getting fresh-cut sod quick and easy. Use our easy mapping tool to size up your yard once, and see your options instantly.</p>
-      <a class="text-arrow" href="#measure-lawn" onclick="openMapCalculator(); return false;">Measure your lawn in seconds →</a>
+      <a class="text-arrow" href="#" onclick="openMapCalculator(); return false;">Measure your lawn in seconds →</a>
     </div>
 
     <div class="service-paths service-paths-stacked">
@@ -1838,7 +1903,7 @@
           </ul>
           <div class="service-actions">
             <button class="btn btn-primary service-route-btn" type="button" onclick="routeServiceButton(event,'delivery')">Get delivery pricing</button>
-            <a class="service-text-link" href="#measure-lawn" onclick="openMapCalculator(); return false;">Measure your lawn on the map →</a>
+            <a class="service-text-link" href="#" onclick="openMapCalculator(); return false;">Measure your lawn on the map →</a>
           </div>
         </div>
       </article>
@@ -1858,7 +1923,7 @@
           </ul>
           <div class="service-actions">
             <button class="btn btn-blue service-route-btn" type="button" onclick="routeServiceButton(event,'installation')">Estimate installation</button>
-            <a class="service-text-link" href="#measure-lawn" onclick="openMapCalculator(); return false;">Measure your lawn on the map →</a>
+            <a class="service-text-link" href="#" onclick="openMapCalculator(); return false;">Measure your lawn on the map →</a>
           </div>
         </div>
       </article>
@@ -1873,24 +1938,7 @@
     <span class="eyebrow on-dark">Real crews. Real equipment.</span>
     <h2>Not&nbsp;just&nbsp;two&nbsp;guys and&nbsp;a&nbsp;wheelbarrow.</h2>
     <p>(Unless those guys also brought 12 semis and a tractor.)<br>Whether it’s a tight backyard rescue or a massive commercial development, just pull the trigger and we'll show up with the heavy equipment to handle it all.</p>
-    <button class="btn btn-primary" onclick="openWizard()">Schedule now</button>
-  </div>
-</section>
-
-<!-- ===== Map sod calculator ===== -->
-<section id="measure-lawn" class="band-blue measurement-feature">
-  <div class="wrap">
-    <div class="measure-launch-card reveal">
-      <span class="eyebrow">NO SWEAT REQUIRED</span>
-      <h2>Put down the measuring wheel.</h2>
-      <p>
-        Type in the property address, trace the lawn on the map, and use the result
-        for delivery pricing or a rough installation estimate.
-      </p>
-      <button class="btn btn-primary" type="button" onclick="openMapCalculator()">
-        Open map calculator
-      </button>
-    </div>
+    <button class="btn btn-primary project-flow-btn" type="button" onclick="routeProjectFlow(event)">Schedule now</button>
   </div>
 </section>
 
@@ -1944,23 +1992,41 @@
 
 <!-- ===== Regional coverage ===== -->
 <section id="coverage" class="coverage-editorial">
-  <div class="wrap coverage-grid">
-    <div class="coverage-copy reveal">
+  <div class="wrap coverage-shell">
+    <div class="coverage-intro reveal">
       <span class="eyebrow">Where we work</span>
-      <h2>Fresh sod where you need it</h2>
+      <h2>Serving Southwest Florida and larger projects statewide</h2>
       <p>
-        AgriScape serves homeowners in Arcadia, Bradenton, Sarasota, Venice, North Port,
-        Port Charlotte, Punta Gorda, Fort Myers, and Cape Coral, with larger commercial
-        and government sod projects available across a broader Florida service area.
+        AgriScape delivers and installs sod for homeowners in Arcadia, Bradenton, Sarasota, Venice,
+        North Port, Port Charlotte, Punta Gorda, Fort Myers, and Cape Coral. Larger commercial and
+        government sod projects are available across a broader Florida service area.
       </p>
+    </div>
 
+    <div class="coverage-map-wrap reveal">
+      <div class="florida-map-card" aria-label="AgriScape Florida county service area map">
+        <img
+          class="florida-service-map"
+          src="images/florida-service-map.png"
+          alt="Florida county map showing AgriScape residential delivery and installation areas and commercial large project service areas."
+        />
+      </div>
+    </div>
+
+    <div class="coverage-panels reveal">
       <div class="location-panel residential-panel">
         <span class="location-kicker">Residential delivery and installation</span>
-        <h3>Southwest Florida</h3>
+        <h3>Southwest Florida communities</h3>
         <div class="chips">
-          <span class="chip">Arcadia</span><span class="chip">Bradenton</span><span class="chip">Sarasota</span>
-          <span class="chip">Venice</span><span class="chip">North Port</span><span class="chip">Port Charlotte</span>
-          <span class="chip">Punta Gorda</span><span class="chip">Fort Myers</span><span class="chip">Cape Coral</span>
+          <span class="chip">Arcadia</span>
+          <span class="chip">Bradenton</span>
+          <span class="chip">Sarasota</span>
+          <span class="chip">Venice</span>
+          <span class="chip">North Port</span>
+          <span class="chip">Port Charlotte</span>
+          <span class="chip">Punta Gorda</span>
+          <span class="chip">Fort Myers</span>
+          <span class="chip">Cape Coral</span>
         </div>
       </div>
 
@@ -1968,21 +2034,15 @@
         <span class="location-kicker">Commercial and government</span>
         <h3>Broader project service area</h3>
         <div class="chips">
-          <span class="chip">Southwest Florida</span><span class="chip">Tampa Bay</span>
-          <span class="chip">Central Florida</span><span class="chip">Space Coast</span>
-          <span class="chip">South Florida</span><span class="chip">Statewide by project</span>
+          <span class="chip">Southwest Florida</span>
+          <span class="chip">Tampa Bay</span>
+          <span class="chip">Central Florida</span>
+          <span class="chip">Space Coast</span>
+          <span class="chip">South Florida</span>
+          <span class="chip">Statewide by project</span>
         </div>
       </div>
     </div>
-
-<div class="florida-map-card reveal" aria-label="AgriScape Florida county service area map">
-  <img
-    class="florida-service-map"
-    src="images/florida-service-map.png"
-    alt="Florida county map showing AgriScape residential delivery and installation areas in gold and commercial large project service areas in blue, with the Florida Keys gray and Lake Okeechobee included."
-  />
-
-</div>
   </div>
 </section>
 
@@ -2042,8 +2102,8 @@
     <h2 class="reveal">Ready to plan your sod project?</h2>
     <p class="reveal">Measure the property, request pricing, or talk with our team about the right next step.</p>
     <div class="cta-row reveal">
-      <button class="btn btn-primary" onclick="openWizard()">Schedule now</button>
-      <a class="btn btn-out-light" href="#measure-lawn">Measure your lawn on the map</a>
+      <button class="btn btn-primary project-flow-btn" type="button" onclick="routeProjectFlow(event)">Schedule now</button>
+      <a class="btn btn-out-light" href="#" onclick="openMapCalculator(); return false;">Measure your lawn on the map</a>
     </div>
     <p class="callline reveal" style="margin-top:1rem;">Prefer to talk? <a href="tel:+18332474763" style="color:#fff; font-weight:700; text-decoration:underline;">Call or text 833-247-4763</a>.</p>
   </div>
@@ -2063,7 +2123,7 @@
       <div><h4>Hours</h4>
         <div class="hours-row"><span>Mon–Fri</span><span>8:00a – 5:00p</span></div>
         <div class="hours-row"><span>Sat–Sun</span><span>Closed</span></div>
-        <button class="btn btn-primary" style="margin-top:1rem;" onclick="openWizard()">Schedule now</button>
+        <button class="btn btn-primary project-flow-btn" type="button" style="margin-top:1rem;" onclick="routeProjectFlow(event)">Schedule now</button>
       </div>
     </div>
     <div class="foot-bottom"><span>© 2025 AgriScape Sod Service — All rights reserved.</span><span><a href="#" style="display:inline;">Privacy Policy</a> · <a href="#" style="display:inline;">Terms</a></span></div>
@@ -2072,8 +2132,8 @@
 
 <!-- ===== Mobile sticky bar ===== -->
 <div class="mobile-bar">
-  <button class="btn btn-primary" onclick="openWizard()">Schedule now</button>
-  <a class="btn btn-out-light" href="#measure-lawn" style="border-color:rgba(255,255,255,.6);">Measure lawn</a>
+  <button class="btn btn-primary project-flow-btn" type="button" onclick="routeProjectFlow(event)">Schedule now</button>
+  <a class="btn btn-out-light" href="#" onclick="openMapCalculator(); return false;" style="border-color:rgba(255,255,255,.6);">Measure lawn</a>
 </div>
 
 <!-- ===== SCHEDULE / SERVICE ROUTER MODAL ===== -->
@@ -2542,7 +2602,7 @@
     <div class="ph">How can we help?<small>Tap to get started</small></div>
     <a class="fab-act" href="tel:+18332474763"><span class="e">📞</span> Call now</a>
     <a class="fab-act" href="sms:+18332474763"><span class="e">💬</span> Text us</a>
-    <div class="fab-act" onclick="openWizard(); toggleFab();"><span class="e">📝</span> Get a free quote</div>
+    <div class="fab-act project-flow-btn" onclick="routeProjectFlow(event); toggleFab();"><span class="e">📝</span> Get a free quote</div>
     <a class="fab-act" href="https://www.google.com/maps?cid=3443456827260833520" target="_blank" rel="noopener"><span class="e">⭐</span> Leave a review</a>
   </div>
   <button class="fab-btn" id="fabBtn" onclick="toggleFab()" aria-label="Contact options">💬</button>
@@ -2609,6 +2669,21 @@
 
 
   let serviceButtonLocked=false;
+  let projectFlowLocked=false;
+
+  function routeProjectFlow(event){
+    event?.preventDefault();
+    event?.stopPropagation();
+
+    if(projectFlowLocked) return;
+    projectFlowLocked=true;
+
+    openWizard();
+
+    setTimeout(() => {
+      projectFlowLocked=false;
+    },500);
+  }
 
   function routeServiceButton(event,type){
     event?.preventDefault();
@@ -2853,6 +2928,11 @@
 
     button.addEventListener('touchend',event => routeServiceButton(event,type),{passive:false});
     button.addEventListener('pointerup',event => routeServiceButton(event,type));
+  });
+
+  document.querySelectorAll('.project-flow-btn').forEach(button => {
+    button.addEventListener('touchend',event => routeProjectFlow(event),{passive:false});
+    button.addEventListener('pointerup',event => routeProjectFlow(event));
   });
 
 
