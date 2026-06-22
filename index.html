@@ -1392,12 +1392,12 @@
   }
 
   .coverage-shell{
-    max-width:1180px;
+    max-width:1320px;
   }
 
   .coverage-intro{
     max-width:850px;
-    margin:0 auto 1.35rem;
+    margin:0 auto 1.75rem;
     text-align:center;
   }
 
@@ -1409,7 +1409,7 @@
     font-size:clamp(2.1rem,4vw,3.45rem);
     color:var(--blue-deep);
     margin:.45rem auto .8rem;
-    max-width:18ch;
+    max-width:15ch;
   }
 
   .coverage-intro p{
@@ -1421,13 +1421,13 @@
   }
 
   .coverage-map-wrap{
-    width:min(88vw,940px);
+    width:min(92vw,1160px);
     margin:0 auto;
   }
 
   .florida-map-card{
-    padding:14px;
-    border-radius:24px;
+    padding:18px;
+    border-radius:28px;
     background:#fff;
     border:1px solid rgba(13,71,120,.18);
     box-shadow:0 22px 60px rgba(13,71,120,.16);
@@ -1437,13 +1437,46 @@
     width:100%;
     height:auto;
     display:block;
-    border-radius:18px;
+    border-radius:20px;
     background:#eef6fc;
+  }
+
+  .map-legend{
+    display:flex;
+    justify-content:center;
+    gap:1rem 1.35rem;
+    flex-wrap:wrap;
+    margin-top:1rem;
+    color:var(--ink-soft);
+    font-size:.9rem;
+    font-weight:700;
+  }
+
+  .map-legend span{
+    display:inline-flex;
+    align-items:center;
+    gap:.45rem;
+  }
+
+  .map-legend i{
+    width:13px;
+    height:13px;
+    border-radius:4px;
+    display:inline-block;
+    box-shadow:inset 0 0 0 1px rgba(10,58,99,.18);
+  }
+
+  .map-legend .legend-residential i{
+    background:#7aae50;
+  }
+
+  .map-legend .legend-commercial i{
+    background:#1f7bc0;
   }
 
   .coverage-note{
     max-width:760px;
-    margin:.75rem auto 0;
+    margin:1rem auto 0;
     color:var(--ink-soft);
     font-size:.88rem;
     text-align:center;
@@ -1551,6 +1584,11 @@
       border-radius:15px;
     }
 
+    .map-legend{
+      justify-content:flex-start;
+      gap:.65rem 1rem;
+      font-size:.84rem;
+    }
 
     .coverage-note{
       text-align:left;
@@ -1913,10 +1951,10 @@
 <section id="services" class="services-editorial">
   <div class="wrap service-overview">
     <div class="service-intro reveal">
-      <span class="eyebrow">WE'VE GOT YOU COVERED</span>
-      <h2>We&nbsp;drop&nbsp;it&nbsp;off. Or&nbsp;we&nbsp;lay&nbsp;it&nbsp;down. You&nbsp;choose.</h2>
-      <p>No matter the size of the project, we make getting fresh-cut sod quick and easy. Use our easy mapping tool to size up your yard once, and see your options instantly.</p>
-      <a class="text-arrow" href="#" onclick="openMapCalculator(); return false;">Measure your lawn in seconds →</a>
+      <span class="eyebrow">Sod delivery or installation</span>
+      <h2>New lawn, without the guesswork.</h2>
+      <p>Tell us what you need: delivery only, full installation, or help deciding. We’ll use your yard size, ZIP code, grass choice, and project details to point you toward the right quote path before anyone has to play phone tag.</p>
+      <a class="text-arrow" href="#" onclick="openMapCalculator(); return false;">Start your quote →</a>
     </div>
 
     <div class="service-paths service-paths-stacked">
@@ -1925,17 +1963,17 @@
           <img src="images/sod-delivery.jpg" alt="Sod delivery placeholder" />
         </div>
         <div class="service-path-content">
-          <span class="service-label">Sod delivery</span>
-          <h3>Fresh sod delivered to your property.</h3>
-          <p>Choose the grass, estimate your quantity, and request local delivery pricing for your home, crew, or project.</p>
+          <span class="service-label">Delivery only</span>
+          <h3>Have a crew or doing it yourself?</h3>
+          <p>Order fresh-cut sod by the pallet and get delivery pricing based on your grass type, square footage, and location.</p>
           <ul class="service-points">
-            <li>Florida-grown and freshly harvested</li>
-            <li>Several Florida grass varieties</li>
-            <li>Local delivery available</li>
+            <li>Best for DIY installs, landscapers, and replacement patches</li>
+            <li>Pallet quantities estimated from your lawn size</li>
+            <li>Delivery quote tied to your ZIP code</li>
           </ul>
           <div class="service-actions">
-            <button class="btn btn-primary service-route-btn" type="button" onclick="routeServiceButton(event,'delivery')">Get delivery pricing</button>
-            <a class="service-text-link" href="#" onclick="openMapCalculator(); return false;">Measure your lawn on the map →</a>
+            <button class="btn btn-primary service-route-btn" type="button" onclick="routeServiceButton(event,'delivery')">Price delivery</button>
+            <a class="service-text-link" href="#" onclick="openMapCalculator(); return false;">Not sure how much sod you need? Measure it first →</a>
           </div>
         </div>
       </article>
@@ -1945,17 +1983,17 @@
           <img src="images/sod-installation.jpg" alt="Sod installation placeholder" />
         </div>
         <div class="service-path-content">
-          <span class="service-label">Full-service installation</span>
-          <h3>We prepare, install, and clean up.</h3>
-          <p>Tell us about the property and we’ll prepare a planning estimate before confirming conditions during the free site review.</p>
+          <span class="service-label">Installation with prep</span>
+          <h3>Want us to handle the hard part?</h3>
+          <p>Start with a ballpark measurement, then we’ll confirm access, removal, prep, grass type, and scheduling before final pricing.</p>
           <ul class="service-points">
-            <li>Existing lawn removal</li>
-            <li>Ground preparation and grading</li>
-            <li>Fresh sod installation and cleanup</li>
+            <li>Old lawn removal and haul-away</li>
+            <li>Ground prep, grading, and sod installation</li>
+            <li>Free site review before final quote</li>
           </ul>
           <div class="service-actions">
             <button class="btn btn-blue service-route-btn" type="button" onclick="routeServiceButton(event,'installation')">Estimate installation</button>
-            <a class="service-text-link" href="#" onclick="openMapCalculator(); return false;">Measure your lawn on the map →</a>
+            <a class="service-text-link" href="#" onclick="openMapCalculator(); return false;">Start with a map measurement →</a>
           </div>
         </div>
       </article>
@@ -2027,7 +2065,7 @@
   <div class="wrap coverage-shell">
     <div class="coverage-intro reveal">
       <span class="eyebrow">Where we work</span>
-      <h2>From our fields to your front yard</h2>
+      <h2>Florida-grown sod, delivered with local roots</h2>
       <p>
         AgriScape delivers and installs sod across Southwest Florida, including Arcadia,
         Bradenton, Sarasota, Venice, North Port, Port Charlotte, Punta Gorda, Fort Myers,
@@ -2043,6 +2081,10 @@
           src="images/florida-service-map.png"
           alt="Florida county map showing AgriScape residential delivery and installation areas and commercial large project service areas."
         />
+      </div>
+      <div class="map-legend" aria-label="Service area legend">
+        <span class="legend-residential"><i aria-hidden="true"></i> Residential delivery + installation</span>
+        <span class="legend-commercial"><i aria-hidden="true"></i> Commercial / large project service area</span>
       </div>
       <p class="coverage-note">
         Residential service is concentrated in Southwest Florida. Larger commercial, contractor, HOA, and government projects may be available across a wider Florida service area.
