@@ -770,6 +770,7 @@
   /* ---- Mobile sticky bar ---- */
   .mobile-bar{ display:none; position:fixed; bottom:0; left:0; right:0; z-index:70; background:var(--blue-deep); padding:.55rem; gap:.55rem; box-shadow:0 -6px 20px -10px rgba(0,0,0,.6); }
   .mobile-bar .btn{ flex:1; padding:.8em 1em; font-size:.93rem; }
+  .mobile-bar .project-flow-btn{ width:100%; flex:1 1 100%; }
 
   .reveal{ opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease; }
   .reveal.in{ opacity:1; transform:none; }
@@ -2139,7 +2140,6 @@
 <!-- ===== Mobile sticky bar ===== -->
 <div class="mobile-bar">
   <button class="btn btn-primary project-flow-btn" type="button" onclick="routeProjectFlow(event)">Schedule now</button>
-  <a class="btn btn-out-light" href="#" onclick="openMapCalculator(); return false;" style="border-color:rgba(255,255,255,.6);">Measure lawn</a>
 </div>
 
 <!-- ===== SCHEDULE / SERVICE ROUTER MODAL ===== -->
