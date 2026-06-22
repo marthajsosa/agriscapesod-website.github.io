@@ -1323,6 +1323,42 @@
     text-align:center;
   }
 }
+
+
+  @media(max-width:720px){
+    #installationFoot{
+      flex-direction:column;
+      align-items:stretch;
+      gap:.7rem;
+    }
+
+    #installationFoot > div{
+      display:flex;
+      flex-direction:column;
+      gap:.6rem;
+      width:100%;
+    }
+
+    #installationFoot .btn{
+      width:100%;
+      justify-content:center;
+    }
+
+    #installationNext{
+      order:1;
+    }
+
+    #installationBack{
+      order:2;
+    }
+
+    #installationFoot .callrep{
+      order:3;
+      justify-content:center;
+      min-height:44px;
+    }
+  }
+
   @media (prefers-reduced-motion:reduce){
     *{ scroll-behavior:auto; } .reveal{ opacity:1; transform:none; transition:none; }
     .svc:hover,.btn:hover{ transform:none; }
@@ -1907,7 +1943,7 @@
     <div class="trust-stats">
       <div class="trust-stat"><strong>16 Years</strong><span>Family-owned in Florida since 2012</span></div>
       <div class="trust-stat"><strong>12 Hours</strong><span>Max time from harvest to delivery</span></div>
-      <div class="trust-stat"><strong>9 Unique Varieties</strong><span>St. Augustine, Zoysia, Bermuda, and Bahia</span></div>
+      <div class="trust-stat"><strong>12 Unique Varieties</strong><span>St. Augustine, Zoysia, Bermuda, and Bahia</span></div>
       <div class="trust-stat"><strong>4.7 Stars</strong><span>Customer-approved quality</span></div>
       <div class="trust-stat"><strong>100% Florida-Grown</strong><span>Grown for Florida lawns</span></div>
     </div>
@@ -2136,7 +2172,6 @@
       <div><h4>Hours</h4>
         <div class="hours-row"><span>Mon–Fri</span><span>8:00a – 5:00p</span></div>
         <div class="hours-row"><span>Sat–Sun</span><span>Closed</span></div>
-        <button class="btn btn-primary project-flow-btn" type="button" style="margin-top:1rem;" onclick="routeProjectFlow(event)">Schedule now</button>
       </div>
     </div>
     <div class="foot-bottom"><span>© 2025 AgriScape Sod Service — All rights reserved.</span><span><a href="#" style="display:inline;">Privacy Policy</a> · <a href="#" style="display:inline;">Terms</a></span></div>
@@ -2281,6 +2316,36 @@
             <small>A dense turf with a fine-to-medium texture.</small>
           </button>
 
+          <button class="delivery-choice installation-grass" type="button" data-grass="CitraZoy Zoysia">
+            CitraZoy Zoysia
+            <small>Fine-bladed zoysia with good Florida performance.</small>
+          </button>
+
+          <button class="delivery-choice installation-grass" type="button" data-grass="Icon Zoysia">
+            Icon Zoysia
+            <small>Dense zoysia with strong wear tolerance.</small>
+          </button>
+
+          <button class="delivery-choice installation-grass" type="button" data-grass="Bimini Bermuda">
+            Bimini Bermuda
+            <small>Fine-textured bermuda for sunny lawns.</small>
+          </button>
+
+          <button class="delivery-choice installation-grass" type="button" data-grass="Celebration Bermuda">
+            Celebration Bermuda
+            <small>Durable bermuda with strong heat tolerance.</small>
+          </button>
+
+          <button class="delivery-choice installation-grass" type="button" data-grass="CitraBlue St. Augustine">
+            CitraBlue St. Augustine
+            <small>Blue-green St. Augustine with shade tolerance.</small>
+          </button>
+
+          <button class="delivery-choice installation-grass" type="button" data-grass="Seville St. Augustine">
+            Seville St. Augustine
+            <small>Dwarf St. Augustine for a lower-growing lawn.</small>
+          </button>
+
           <button class="delivery-choice installation-grass" type="button" data-grass="Argentine Bahia">
             Argentine Bahia
             <small>A durable option for large sunny areas.</small>
@@ -2348,9 +2413,7 @@
         <label class="installation-ack">
           <input id="installationAcknowledge" type="checkbox" />
           <span>
-            I understand this is a rough planning estimate, not a final quote.
-            AgriScape must verify the property, measurements, access, and site
-            conditions before confirming the installation price.
+            I understand this is a rough planning estimate. Final pricing depends on the site review.
           </span>
         </label>
 
@@ -2362,8 +2425,7 @@
         <h3>Request your free final quote</h3>
 
         <p style="color:var(--ink-soft); margin-top:0;">
-          Enter your contact information, then email the request or call us to
-          schedule the free on-site measurement and consultation.
+          We’ll confirm the measurement, access, and site conditions before final pricing.
         </p>
 
         <div class="installation-contact-grid">
@@ -2396,18 +2458,14 @@
             type="button"
             onclick="emailInstallationRequest()"
           >
-            Email my final quote request
+            Send quote request
           </button>
 
           <a class="btn btn-primary" href="tel:+18332474763">
-            Call 833-247-4763 for my free on-site quote
+            Call 833-247-4763
           </a>
         </div>
 
-        <p class="installation-required">
-          Emailing opens your device’s email app with the request filled in.
-          The website does not send the request automatically yet.
-        </p>
 
         <div class="installation-error" id="installationContactError"></div>
       </div>
@@ -2415,7 +2473,7 @@
     </div>
 
     <div class="wz-foot" id="installationFoot">
-      <a class="callrep" href="tel:+18332474763">📞 Free on-site consultation</a>
+      <a class="callrep" href="tel:+18332474763">📞 Call 833-247-4763</a>
 
       <div>
         <button
@@ -2488,6 +2546,36 @@
           <button class="delivery-choice" type="button" data-grass="Empire Zoysia">
             Empire Zoysia
             <small>A dense turf with a fine-to-medium texture.</small>
+          </button>
+
+          <button class="delivery-choice" type="button" data-grass="CitraZoy Zoysia">
+            CitraZoy Zoysia
+            <small>Fine-bladed zoysia with good Florida performance.</small>
+          </button>
+
+          <button class="delivery-choice" type="button" data-grass="Icon Zoysia">
+            Icon Zoysia
+            <small>Dense zoysia with strong wear tolerance.</small>
+          </button>
+
+          <button class="delivery-choice" type="button" data-grass="Bimini Bermuda">
+            Bimini Bermuda
+            <small>Fine-textured bermuda for sunny lawns.</small>
+          </button>
+
+          <button class="delivery-choice" type="button" data-grass="Celebration Bermuda">
+            Celebration Bermuda
+            <small>Durable bermuda with strong heat tolerance.</small>
+          </button>
+
+          <button class="delivery-choice" type="button" data-grass="CitraBlue St. Augustine">
+            CitraBlue St. Augustine
+            <small>Blue-green St. Augustine with shade tolerance.</small>
+          </button>
+
+          <button class="delivery-choice" type="button" data-grass="Seville St. Augustine">
+            Seville St. Augustine
+            <small>Dwarf St. Augustine for a lower-growing lawn.</small>
           </button>
 
           <button class="delivery-choice" type="button" data-grass="Argentine Bahia">
@@ -2867,13 +2955,12 @@
       result.innerHTML=`
         <div class="wz-route-card">
           <h4>Delivery is available in your area</h4>
-          <p>Measure the lawn on the map, choose the grass type, and carry the calculated square footage and pallet count into the delivery-pricing flow.</p>
+          <p>Measure your lawn to get the square footage and pallet count.</p>
         </div>
         <div class="wz-route-actions">
-          <button class="btn btn-primary" type="button" onclick="scrollToMapFromWizard()">Measure your lawn on the map</button>
-          <a class="btn btn-blue" href="tel:+18332474763">Call 833-247-4763 to order now</a>
+          <button class="btn btn-primary" type="button" onclick="scrollToMapFromWizard()">Measure my lawn</button>
+          <a class="btn btn-blue" href="tel:+18332474763">Call 833-247-4763</a>
         </div>
-        <p class="wz-route-note">Map measurements and emailed pricing are estimates. Grass availability, delivery timing, site access, and final order details must be confirmed.</p>
       `;
       return;
     }
@@ -3312,9 +3399,7 @@
     if(savedProjectZip){
       const isResidential=residentialZipPrefixes.includes(savedProjectZip.slice(0,3));
       projectZipMsg.className=isResidential?'zipmsg ok':'zipmsg warn';
-      projectZipMsg.textContent=isResidential
-        ? '✓ We carried over the ZIP code you already entered.'
-        : 'We carried over your ZIP code and will confirm installation coverage.';
+      projectZipMsg.textContent='';
     }else{
       projectZipMsg.textContent='';
     }
@@ -3555,9 +3640,7 @@
       const isResidential=residentialZipPrefixes.includes(zipToReuse.slice(0,3));
 
       message.className=isResidential?'zipmsg ok':'zipmsg warn';
-      message.textContent=isResidential
-        ? '✓ We carried over the ZIP code you already entered.'
-        : 'We carried over your ZIP code and will confirm delivery availability.';
+      message.textContent='';
     }
 
     deliveryOverlay.classList.add('open');
