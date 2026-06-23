@@ -782,7 +782,7 @@
   /* ======== WIZARD MODAL ======== */
   .wz-overlay{ position:fixed; inset:0; z-index:5000; background:rgba(10,30,50,.6); display:none; align-items:flex-start; justify-content:center; padding:4vh 16px; overflow-y:auto; }
   .wz-overlay.open{ display:flex; }
-  .wz{ background:#fff; width:100%; max-width:620px; border-radius:16px; overflow:hidden; box-shadow:0 30px 80px -30px rgba(0,0,0,.6); }
+  .wz{ background:#fff; width:100%; max-width:620px; border-radius:16px; overflow:hidden; box-shadow:0 30px 80px -30px rgba(0,0,0,.6); display:flex; flex-direction:column; max-height:92dvh; }
   .wz-head{ background:var(--blue-deep); color:#fff; padding:1rem 1.3rem; display:flex; align-items:center; justify-content:space-between; }
   .wz-head .t{ font-family:var(--display); font-weight:800; font-size:1.15rem; }
   .wz-head .s{ font-size:.85rem; color:#bfe3fb; }
@@ -793,7 +793,7 @@
   .wz-step.active .dot{ background:var(--blue); color:#fff; border-color:var(--blue); }
   .wz-step.done .dot{ background:var(--green); color:#fff; border-color:var(--green); }
   .wz-step .lab{ font-size:.7rem; font-weight:600; color:var(--ink-soft); }
-  .wz-body{ padding:1.4rem 1.3rem; }
+  .wz-body{ padding:1.4rem 1.3rem; overflow-y:auto; flex:1; }
   .wz-body h3{ font-size:1.25rem; color:var(--blue-deep); margin:0 0 1rem; }
   .wz-panel{ display:none; }
   .wz-panel.show{ display:block; }
@@ -819,7 +819,8 @@
   .callback{ margin-top:1.2rem; padding-top:1.2rem; border-top:1px solid var(--line); }
   .callback .row2{ display:grid; grid-template-columns:1fr 1fr; gap:.7rem; }
   .wz-foot{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1.1rem 1.3rem; border-top:1px solid var(--line); }
-  .wz-foot .callrep{ color:var(--green-d); font-weight:700; font-size:.92rem; display:inline-flex; align-items:center; gap:.4em; }
+  .wz-foot .callrep{ color:var(--green-d); font-weight:700; font-size:.92rem; display:inline-flex; align-items:center; gap:.4em; white-space:nowrap; }
+  @media(max-width:480px){ .wz-foot .callrep .callrep-text{ display:none; } }
   .wz-success{ text-align:center; padding:2.4rem 1.3rem; }
   .wz-success .check{ width:64px; height:64px; border-radius:50%; background:var(--green); color:#fff; display:grid; place-items:center; margin:0 auto 1rem; font-size:2rem; font-weight:800; }
   .wz-success h3{ color:var(--blue-deep); }
@@ -1447,7 +1448,7 @@
   }
 
   @media(max-width:640px){
-    #bpWz{ max-width:100%; border-radius:0; min-height:100dvh; }
+    #bpWz{ max-width:100%; border-radius:0; height:100dvh; max-height:100dvh; }
     .bp-prog{ flex-wrap:wrap; }
     #bp-map #sodMap{ height:42vh; min-height:260px; }
   }
@@ -2388,7 +2389,7 @@
     </div><!-- /wz-body -->
 
     <div class="wz-foot" id="bpFoot">
-      <a class="callrep" href="tel:+18332474763">📞 Call 833-247-4763</a>
+      <a class="callrep" href="tel:+18332474763">📞<span class="callrep-text"> Call 833-247-4763</span></a>
       <div style="display:flex;gap:.6rem;">
         <button class="btn btn-mini-ghost" id="bpBack" type="button" onclick="bpPrev()" style="display:none;">Back</button>
         <button class="btn btn-primary" id="bpNext" type="button" onclick="bpNext()">Continue</button>
@@ -3306,6 +3307,16 @@
     bpState.pallets = mapPalletCount;
     if (mapMeasuredSqFt >= 1) document.getElementById('bp-map-error').textContent = '';
     updateSizeBadges();
+    // On mobile, scroll so the results panel is visible after a shape is drawn
+    if (mapMeasuredSqFt >= 1 && window.innerWidth <= 720) {
+      const results = document.querySelector('#bp-map .map-results');
+      const wzBody = document.querySelector('.wz-body');
+      if (results && wzBody) {
+        setTimeout(() => {
+          wzBody.scrollTo({ top: wzBody.scrollHeight, behavior: 'smooth' });
+        }, 100);
+      }
+    }
   }
 
   function initializeSodMap() {
@@ -3363,6 +3374,9 @@
     removable.forEach(layer => sodMap.removeLayer(layer));
     updateMapTotals();
     document.getElementById('mapStatus').textContent = 'Outlined areas cleared. Draw a new polygon when ready.';
+    // Scroll back up to map so user can redraw
+    const wzBody = document.querySelector('.wz-body');
+    if (wzBody) setTimeout(() => wzBody.scrollTo({ top: 0, behavior: 'smooth' }), 50);
   });
 
   initializeSodMap();
