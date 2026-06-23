@@ -1448,7 +1448,7 @@
   }
 
   @media(max-width:640px){
-    #bpWz{ max-width:100%; border-radius:0; height:var(--bp-vh,100dvh); max-height:var(--bp-vh,100dvh); }
+    #bpWz{ max-width:100%; border-radius:0; height:100svh; max-height:100svh; }
     .bp-prog{ flex-wrap:wrap; }
     #bp-map #sodMap{ height:42vh; min-height:260px; }
   }
@@ -3013,7 +3013,6 @@
     showBpPanel(getBpFlow()[0]);
     bpOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
-    setBpVh();
   }
 
   function closeBP() {
@@ -3021,15 +3020,6 @@
     document.body.style.overflow = '';
     setTimeout(() => { if (typeof sodMap !== 'undefined' && sodMap) sodMap.invalidateSize(); }, 100);
   }
-
-  function setBpVh() {
-    if (window.innerWidth <= 640) {
-      document.documentElement.style.setProperty('--bp-vh', window.innerHeight + 'px');
-    } else {
-      document.documentElement.style.removeProperty('--bp-vh');
-    }
-  }
-  window.addEventListener('resize', setBpVh);
 
   bpOverlay.addEventListener('click', e => { if (e.target === bpOverlay) closeBP(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && bpOverlay.classList.contains('open')) closeBP(); });
