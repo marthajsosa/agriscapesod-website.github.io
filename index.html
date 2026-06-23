@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -804,6 +805,7 @@
   .opt.sel{ border-color:var(--green); background:var(--tint-green); box-shadow:inset 0 0 0 1px var(--green); }
   .wz-body label{ display:block; font-weight:600; font-size:.88rem; color:var(--blue-deep); margin:.2rem 0 .35rem; }
   .wz-body input{ width:100%; padding:.8rem .9rem; border:1.5px solid var(--line); border-radius:10px; font-family:var(--body); font-size:1rem; }
+  .wz-body input[type="checkbox"]{ width:auto; padding:0; border:none; border-radius:0; flex-shrink:0; margin-top:.18rem; }
   .wz-body input:focus{ outline:none; border-color:var(--green); }
   .zipmsg{ margin-top:.7rem; font-weight:600; font-size:.92rem; }
   .zipmsg.ok{ color:var(--green-d); } .zipmsg.warn{ color:#b9783f; }
@@ -1369,10 +1371,86 @@
   #bpWz{ max-width:min(920px,96vw); }
   #bp-map .map-results{ position:static; border-top:5px solid var(--green); }
   .bp-error{ min-height:1.2em; margin-top:.6rem; color:#a3452f; font-size:.86rem; font-weight:700; }
+
+  /* Mobile map layout — force single column and compact the results panel */
+  @media(max-width:720px){
+    /* Override the 2026 redesign's minmax(300px) which prevents column collapse */
+    #bp-map .map-calc-layout{
+      grid-template-columns:1fr !important;
+      gap:.6rem;
+    }
+
+    /* Taller map now that it's full-width */
+    #bp-map #sodMap{
+      height:46vh;
+      min-height:280px;
+    }
+
+    /* Address search: stack vertically so button is full-width */
+    #bp-map .map-search{
+      grid-template-columns:1fr;
+      gap:.5rem;
+    }
+    #bp-map #mapSearchBtn{
+      width:100%;
+    }
+
+    /* Results panel: compact horizontal metric strip */
+    #bp-map .map-results{
+      padding:.75rem .85rem;
+      border-radius:12px;
+    }
+
+    /* Hide the verbose how-it-works block on mobile — the UI is self-explanatory */
+    #bp-map .map-results .eyebrow,
+    #bp-map .map-results h3,
+    #bp-map .map-results .map-instructions{
+      display:none;
+    }
+
+    /* Show the four metrics in a 2×2 grid using subgrid on the aside */
+    #bp-map .map-results{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:.35rem .6rem;
+      align-items:start;
+    }
+    /* Span full width for elements that shouldn't split into two columns */
+    #bp-map .map-results .eyebrow,
+    #bp-map .map-results h3,
+    #bp-map .map-results .map-instructions,
+    #bp-map .map-results div[style*="margin-top"],
+    #bp-map .map-results .map-disclaimer{ grid-column: 1 / -1; }
+    #bp-map .map-metric{
+      flex-direction:column;
+      align-items:flex-start;
+      gap:.05rem;
+      padding:.45rem .5rem;
+      background:var(--tint-blue);
+      border-radius:8px;
+      border-bottom:none;
+    }
+    #bp-map .map-metric span{ font-size:.72rem; }
+    #bp-map .map-metric strong{ font-size:1rem; }
+    #bp-map .map-metric.primary strong{ font-size:1.2rem; }
+
+    /* Clear button: smaller on mobile */
+    #bp-map #clearMapShapes{
+      padding:.65em 1em;
+      font-size:.88rem;
+    }
+
+    /* Map status bar: smaller text */
+    #bp-map .map-status{
+      font-size:.78rem;
+      padding:.5rem .75rem;
+    }
+  }
+
   @media(max-width:640px){
     #bpWz{ max-width:100%; border-radius:0; min-height:100dvh; }
-    #bp-map #sodMap{ height:42vh; min-height:280px; }
     .bp-prog{ flex-wrap:wrap; }
+    #bp-map #sodMap{ height:42vh; min-height:260px; }
   }
 
   /* ===== 2026 editorial redesign ===== */
@@ -1918,6 +1996,7 @@
     </div>
     <nav class="nav-row" id="navRow">
       <a href="#services">Services</a>
+      <a href="#" onclick="openMapCalculator(); return false;">Measure Your Lawn</a>
       <a href="#coverage">Service Area</a>
       <a href="#reviews">Reviews</a>
       <!-- Resources link hidden until article pages are ready: <a href="#articles">Resources</a> -->
@@ -2290,9 +2369,9 @@
         <label for="bp-email">Email</label>
         <input id="bp-email" type="email" autocomplete="email" style="margin-bottom:1rem;" />
         <div style="display:grid;gap:.55rem;padding:1rem;background:var(--tint-blue);border:1px solid var(--line);border-radius:12px;margin-bottom:.5rem;">
-          <label style="display:flex;align-items:flex-start;gap:.65rem;font-weight:400;font-size:.9rem;"><input type="checkbox" id="bp-consult-grass" style="margin-top:.18rem;flex-shrink:0;"> I’d like Agriscapes to recommend the best grass for my property.</label>
-          <label style="display:flex;align-items:flex-start;gap:.65rem;font-weight:400;font-size:.9rem;"><input type="checkbox" id="bp-consult-soil" style="margin-top:.18rem;flex-shrink:0;"> I’d like Agriscapes to discuss whether soil improvement recommendations may benefit this project.</label>
-          <label style="display:flex;align-items:flex-start;gap:.65rem;font-weight:400;font-size:.9rem;"><input type="checkbox" id="bp-consult-weed" style="margin-top:.18rem;flex-shrink:0;"> I’d like Agriscapes to discuss whether weed and unwanted grass control may benefit this project.</label>
+          <label style="display:flex;align-items:flex-start;gap:.65rem;font-weight:400;font-size:.9rem;cursor:pointer;"><input type="checkbox" id="bp-consult-grass" style="margin-top:.18rem;flex-shrink:0;"><span style="flex:1;min-width:0;overflow-wrap:break-word;">I’d like Agriscapes to recommend the best grass for my property.</span></label>
+          <label style="display:flex;align-items:flex-start;gap:.65rem;font-weight:400;font-size:.9rem;cursor:pointer;"><input type="checkbox" id="bp-consult-soil" style="margin-top:.18rem;flex-shrink:0;"><span style="flex:1;min-width:0;overflow-wrap:break-word;">I’d like Agriscapes to discuss whether soil improvement recommendations may benefit this project.</span></label>
+          <label style="display:flex;align-items:flex-start;gap:.65rem;font-weight:400;font-size:.9rem;cursor:pointer;"><input type="checkbox" id="bp-consult-weed" style="margin-top:.18rem;flex-shrink:0;"><span style="flex:1;min-width:0;overflow-wrap:break-word;">I’d like Agriscapes to discuss whether weed and unwanted grass control may benefit this project.</span></label>
         </div>
         <div class="bp-error" id="bp-contact-error"></div>
       </div>
