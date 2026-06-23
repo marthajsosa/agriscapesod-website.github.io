@@ -818,7 +818,7 @@
   .slot-msg .phone{ font-family:var(--display); font-weight:800; font-size:1.5rem; color:var(--blue-deep); margin:.3rem 0; }
   .callback{ margin-top:1.2rem; padding-top:1.2rem; border-top:1px solid var(--line); }
   .callback .row2{ display:grid; grid-template-columns:1fr 1fr; gap:.7rem; }
-  .wz-foot{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1.1rem 1.3rem; padding-bottom:calc(1.1rem + env(safe-area-inset-bottom, 0px)); border-top:1px solid var(--line); }
+  .wz-foot{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1.1rem 1.3rem; border-top:1px solid var(--line); }
   .wz-foot .callrep{ color:var(--green-d); font-weight:700; font-size:.92rem; display:inline-flex; align-items:center; gap:.4em; white-space:nowrap; }
   @media(max-width:480px){ .wz-foot .callrep .callrep-text{ display:none; } }
   .wz-success{ text-align:center; padding:2.4rem 1.3rem; }
@@ -1448,7 +1448,7 @@
   }
 
   @media(max-width:640px){
-    #bpWz{ max-width:100%; border-radius:0; height:100dvh; max-height:100dvh; }
+    #bpWz{ max-width:100%; border-radius:0; height:var(--bp-vh,100dvh); max-height:var(--bp-vh,100dvh); }
     .bp-prog{ flex-wrap:wrap; }
     #bp-map #sodMap{ height:42vh; min-height:260px; }
   }
@@ -3013,6 +3013,7 @@
     showBpPanel(getBpFlow()[0]);
     bpOverlay.classList.add('open');
     document.body.style.overflow = 'hidden';
+    setBpVh();
   }
 
   function closeBP() {
@@ -3020,6 +3021,15 @@
     document.body.style.overflow = '';
     setTimeout(() => { if (typeof sodMap !== 'undefined' && sodMap) sodMap.invalidateSize(); }, 100);
   }
+
+  function setBpVh() {
+    if (window.innerWidth <= 640) {
+      document.documentElement.style.setProperty('--bp-vh', window.innerHeight + 'px');
+    } else {
+      document.documentElement.style.removeProperty('--bp-vh');
+    }
+  }
+  window.addEventListener('resize', setBpVh);
 
   bpOverlay.addEventListener('click', e => { if (e.target === bpOverlay) closeBP(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && bpOverlay.classList.contains('open')) closeBP(); });
